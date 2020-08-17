@@ -1,12 +1,27 @@
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import './assets/css/fontawesome/css/fontawesome-all.css';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel';
+import './App.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const app = (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {app}
   </React.StrictMode>,
   document.getElementById('root')
 );

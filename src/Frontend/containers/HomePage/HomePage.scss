@@ -1,0 +1,70 @@
+// .categories {
+//   background-color: #3772ff;
+//   width: 250px;
+// }
+
+.main {
+
+}
+
+.sec1-backimg {
+  background-image: url(../../../assets/images/sec1-backimg.jpg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.full_height {
+  height: 100%;
+}
+
+.carousel-imgs {
+  width: 280px;
+  height: 280px;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.refrigerator h1,
+.toaster h1,
+.chimney h1,
+.laptop-pc h1 {
+  font-size: 1.5rem;
+
+}
+
+.laptop-pc h1 {
+  color: #76b900;
+}
+
+.carousel-control-prev, .carousel-control-next {
+  width: 3%;
+  height: 40%;
+  margin: auto;
+  background-color: #ffffff;
+}
+
+.carousel-control-prev-icon {
+  background-image: url(../../../assets/images/left_arrow.svg);
+}
+
+.carousel-control-next-icon {
+  background-image: url(../../../assets/images/left_arrow.svg);
+  transform: rotate(180deg);
+}
+
+.carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.carousel-indicators .active {
+  background-color: #3772ff;
+}

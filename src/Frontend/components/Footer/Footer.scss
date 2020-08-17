@@ -1,0 +1,97 @@
+html,body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.row {
+  margin: 0 !important;
+}
+
+.row::before,
+.row::after {
+  display: inline-block;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  li {
+    list-style: none;
+  }
+}
+
+.footer {
+  background-color: #FFFFFF;
+}
+
+.foot-pad-top {
+  padding-top: 1.875rem;
+}
+
+.navbar-brand img {
+  width: 100px;
+}
+
+.foot-cont-heading-parent a {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 16px;
+  color: rgba($color: #000000, $alpha: 0.4);
+  padding: 0.75rem 0;
+  width: max-content;
+  font-weight: 500;
+}
+
+.foot-cont-heading-parent a:hover,
+.privacy-tc a:hover {
+  color: #3772ff;
+  text-decoration: none;
+}
+
+.social-media-icons {
+  a {
+    padding: 0.25rem;
+    display: inline-block;
+    position: relative;
+    .fab {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+.foot-cont-heading {
+  font-size: 1.125rem;
+  font-weight: bold;
+  line-height: 179.2%;
+  color: rgba($color: #000000, $alpha: 0.7);
+}
+
+.privacy-tc {
+  padding-top: 2rem;
+  padding-bottom: 1.25rem;
+}
+
+.privacy-tc-child {
+  font-size: 0.8125rem;
+  line-height: 16px;
+  color:  rgba($color: #000000, $alpha: 0.5);
+  margin: 0;
+  font-weight: 500;
+}
+.privacy-tc-child,
+.foot-cont-heading-parent a {
+  transition: all 0.5s ease;
+}
+
+.social-media-icons a .fa {
+  font-size: 1.25rem;
+}
+
+.logos_list {
+  li {
+    display: inline-block;
+    padding-right: 20px;
+  }
+}

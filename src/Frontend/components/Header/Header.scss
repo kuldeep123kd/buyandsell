@@ -1,0 +1,164 @@
+@import '../../../assets/css/mixmin';
+
+.nav-bar {
+  padding: 15px 0;
+  background-color: #3772ff 
+}
+
+.logo,
+.navbar-brand {
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: #FFFFFF !important;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.search-inp-parent {
+  padding-top: 15px;
+}
+
+.prod-supl-selected .fa {
+  display: inline-block;
+  color: #212529;
+  font-size: 10px;
+  margin-left: 3px;
+  @include translate(translateY(1.5px));
+}
+.prod-supl-list {
+  text-align: left;
+  position: absolute;
+  padding: 0;
+  top: 65px;
+  left: 8px;
+  z-index: 1;
+  padding: 0.25rem 0;
+  visibility: hidden;
+  opacity: 0;
+  box-shadow: 0 0 25px rgba(63, 78, 100, 0.15);
+  background-color: #FFFFFF;
+  @include transition(all 0.2s ease);
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    top: 35px;
+    @include transition(all 0.3s ease);
+  }
+  li {
+    padding: 0.325rem 0.625rem;
+    @include transition(all 0.3s ease);
+    cursor: pointer;
+    &:first-child {
+      border-bottom: 1px solid #ededed;
+    }
+    &:hover {
+      background-color: #ededed;
+    }
+  }
+}
+
+.search-inpt {
+  background: #FFFFFF;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  flex-flow: unset;
+  width: 100%;
+}
+
+.inputsearch {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.prod-supl-selected {
+  border-left: 1px solid #ced4da;
+  padding: 0 0.75rem;
+  cursor: pointer;
+}
+
+.search-btn {
+  border: 0 !important;
+  box-shadow: none !important;
+  background-color: #3772ff !important;
+  &:hover {
+    background-color: #3772ff;
+  }
+  .fa {
+    color: #FFFFFF;
+  }
+}
+
+.quick-options {
+  .fa {
+    font-size: 30px;
+    color: #FFFFFF;
+  }
+  a:hover,
+  a span:hover,
+  a p:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+}
+
+.user-signin {
+  width: max-content;
+}
+
+.user-signin a,
+.messages span,
+.orders span,
+.user-cart span,
+.user-cart-tprice p {
+  font-size: 1rem;
+  color: #FFFFFF;
+  font-weight: 400;
+  padding-left: 0.875rem;
+  @include transition(all 0.2s ease-in-out);
+}
+.messages span,
+.orders span,
+.user-cart span,
+.user-cart-tprice p {
+  padding-left: 0;
+}
+
+.user-cart-tprice p {
+  margin: 0;
+}
+
+.user-signupin,
+.messages,
+.orders,
+.cart {
+  padding: 0 15px;
+}
+
+.user-cart-items {
+  position: absolute;
+  bottom: -1px;
+  right: -14px;
+  width: 23px;
+  height: 23px;
+  background: #ff7f50;
+  border-radius: 50%;
+  text-align: center;
+  span {
+    display: block;
+    line-height: 20px;
+    font-size: 0.75rem;
+    color: #FFFFFF;
+    @include translate(translateY(1.5px));
+  }
+  span:hover {
+    color: #FFFFFF !important;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .search-inp-parent {
+    padding-top: 0px;
+  }
+}
+
