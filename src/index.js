@@ -14,8 +14,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const app = (
-  <BrowserRouter>
-    <App />
+  <BrowserRouter basename="/" >
+      <App />
   </BrowserRouter>
 );
 

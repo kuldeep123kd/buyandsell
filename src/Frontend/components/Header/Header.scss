@@ -1,13 +1,17 @@
 @import '../../../assets/css/mixmin';
 
 .nav-bar {
-  padding: 15px 0;
-  background-color: #3772ff 
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  padding: 5px 0;
+  background-color: #3772ff;
+  box-shadow: 0 2px 2.5px 0 rgba(0,0,0,.3);
 }
 
 .logo,
 .navbar-brand {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 500;
   color: #FFFFFF !important;
   &:hover {
@@ -16,7 +20,7 @@
 }
 
 .search-inp-parent {
-  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .prod-supl-selected .fa {
@@ -29,6 +33,7 @@
 .prod-supl-list {
   text-align: left;
   position: absolute;
+  width: max-content;
   padding: 0;
   top: 65px;
   left: 8px;
@@ -49,8 +54,9 @@
     padding: 0.325rem 0.625rem;
     @include transition(all 0.3s ease);
     cursor: pointer;
-    &:first-child {
-      border-bottom: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+    &:last-child {
+      border-bottom: 0;
     }
     &:hover {
       background-color: #ededed;
@@ -91,7 +97,7 @@
 
 .quick-options {
   .fa {
-    font-size: 30px;
+    font-size: 25px;
     color: #FFFFFF;
   }
   a:hover,
@@ -106,7 +112,12 @@
   width: max-content;
 }
 
+.user-signin span {
+  cursor: pointer;
+}
+
 .user-signin a,
+.user-signin span,
 .messages span,
 .orders span,
 .user-cart span,
@@ -117,6 +128,17 @@
   padding-left: 0.875rem;
   @include transition(all 0.2s ease-in-out);
 }
+
+.join-service {
+  a {
+    color: #000000;
+    padding-left: 0;
+    &:hover {
+      color: #000000;
+    }
+  }
+}
+
 .messages span,
 .orders span,
 .user-cart span,
@@ -156,9 +178,17 @@
   }
 }
 
+.search-burger {
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (min-width: 992px) {
   .search-inp-parent {
-    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .search-burger {
+    display: block;
   }
 }
 

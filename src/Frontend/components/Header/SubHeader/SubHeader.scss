@@ -7,7 +7,6 @@
   left: 0;
   visibility: hidden;
   opacity: 0;
-  // min-width: 100%;
   box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
   @include transition(all 0.3s ease);
 }
@@ -35,10 +34,6 @@
       color: #3772ff;
     }
     i {
-      // position: absolute;
-      // top: 51%;
-      // @include translate(translateY(-50%));
-      // right: 0;
       font-size: 12px;
     }
   }
@@ -48,18 +43,18 @@
   -webkit-box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
   box-shadow: 0px 5px 20px rgba(0,0,0,0.1);
   background: #FFFFFF;
-  height: 60px;
+  height: 40px;
 }
 
 .sub-nav-child {
-  height: 60px;
+  height: 40px;
 }
 
 .categories {
-  width: 293px;
+  // width: 293px;
   height: 100%;
   background: #0e8ce4;
-  padding-left: 35px;
+  padding-right: 10px;
   cursor: pointer;
   z-index: 20;
   &:hover {
@@ -116,7 +111,7 @@
       font-size: 1rem;
       font-weight: 400;
       color: #a19a9a;
-      line-height: 60px;
+      line-height: 40px;
       &:hover {
         text-decoration: none;
         color: #3772ff;
@@ -125,13 +120,13 @@
         font-size: 12px;
         display: inline-block;
         margin-left: 5px;
-        @include transition(all 0.3s ease);
+        @include transition(all 0.2s ease);
         @include translate(translateY(-1px));
       }
     }
     &:hover {
       .categories-menu {
-        top: 60px;
+        top: 40px;
         visibility: visible;
         opacity: 1;
       }
@@ -154,10 +149,59 @@
   }
 }
 
-
 @media screen and (min-width: 992px) {
+  .categories {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .navbar-menulist {
+    .main-list-parent {
+      // margin-right: 35px;
+      a {
+        font-size: 0.9375rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .navbar-menulist {
+    .main-list-parent {
+      // margin-right: 35px;
+      display: block;
+      // a {
+      //   font-size: 0.9375rem;
+      // }
+    }
+  }
+  .navbar-menulist {
+    display: flex;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 20;
+    // padding: 0 20px;
+  }
+  .showcategories {
+    visibility: visible;
+    opacity: 1;
+    background-color: #FFFFFF;
+    flex-direction: column;
+  }
+  .subnav-menu {
+    width: 100%;
+  }
+  .navbar-menulist li.main-list-parent {
+    margin-right: 0;
+    padding: 0 20px;
+  }
   .categories-menu {
-    // visibility: visible;
-    // opacity: 1;
+    left: 100%;
   }
 }

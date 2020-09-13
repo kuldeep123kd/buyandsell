@@ -3,7 +3,7 @@ import {createMuiTheme} from '@material-ui/core';
 export const THEME = createMuiTheme({
     palette: {
         primary: {
-            main: '#C6C6C6'
+            main: '#3772ff'
         },
         secondary: {
             main: '#EA4334'
@@ -13,13 +13,13 @@ export const THEME = createMuiTheme({
 
 export const labelProps = {
     style: {
-        paddingLeft: '10px',
-        color: 'grey'
+        // paddingLeft: '0px',
+        // color: 'grey'
     }
 }
 
 export const inputProps = {
     style: {
-        paddingLeft: '10px'
+        // paddingLeft: '0px'
     }
 }
