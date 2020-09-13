@@ -8,7 +8,7 @@ import toaster from '../../../assets/images/multipurpose-toaster.jpg';
 
 
 
-export default  function ControlledCarousel1() {
+export default  function ControlledCarousel() {
   const [index, setIndex] = React.useState(0);
 
   const handleSelect = (selectedIndex, e) => {

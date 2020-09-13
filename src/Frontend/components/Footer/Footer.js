@@ -54,7 +54,7 @@ const Footer = () => {
                   <div className="col foot-cont-heading-parent p-0">
                     <h1 className="foot-cont-heading">Sell</h1>
                     <div>
-                      <Link rel="noopener noreferrer" to="/">Supplier Memberships</Link>
+                      <Link rel="noopener noreferrer" to="/sellerpage">Supplier Memberships</Link>
                       {/* <Link rel="noopener noreferrer" to="/">Learning Center</Link> */}
                       <Link rel="noopener noreferrer" to="/">Partner Program</Link>
                     </div> 

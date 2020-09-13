@@ -1,0 +1,25 @@
+.changelaginfo {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.add-seller-info {
+  padding-top: 30px;
+  font-size: 1.875rem;
+}
+
+.sellerform {
+  width: 50%;
+  margin: auto;
+  padding-top: 20px;
+  .sellerform-inputs {
+    margin-bottom: 20px;
+  }
+  h1 {
+    font-size: 1.25rem;
+  }
+}
+
+.MuiFormControl-root {
+  width: 100%;
+}

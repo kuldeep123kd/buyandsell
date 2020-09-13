@@ -1,0 +1,170 @@
+  [
+    {
+      "value": "Automotive",
+      "label": "Automotive"
+    },
+    {
+      "value": "Baby Products",
+      "label": "Baby Products"
+    },
+    {
+      "value": "Beauty",
+      "label": "Beauty"
+    },
+    {
+      "value": "Books",
+      "label": "Books"
+    },
+    {
+      "value": "Camera and Accessories",
+      "label": "Camera and Accessories"
+    },
+    {
+      "value": "Cleaning and Hygiene products",
+      "label": "Cleaning and Hygiene products"
+    },
+    {
+      "value": "Clothing and Accessories",
+      "label": "Clothing and Accessories"
+    },
+    {
+      "value": "Computer and Accessories",
+      "label": "Computer and Accessories"
+    },
+    {
+      "value": "Consumer Electronics",
+      "label": "Consumer Electronics"
+    },
+    {
+      "value": "Disinfectant Wipes and Sprays",
+      "label": "Disinfectant Wipes and Sprays"
+    },
+    {
+      "value": "Everything Else",
+      "label": "Everything Else"
+    },
+    {
+      "value": "Face Masks (N95, KN95)",
+      "label": "Face Masks (N95, KN95)"
+    },
+    {
+      "value": "Face Masks (Other)",
+      "label": "Face Masks (Other)"
+    },
+    {
+      "value": "Fine Art",
+      "label": "Fine Art"
+    },
+    {
+      "value": "Furniture",
+      "label": "Furniture"
+    },
+    {
+      "value": "Gift Card",
+      "label": "Gift Card"
+    },
+    {
+      "value": "Grocery and Gourmet Food",
+      "label": "Grocery and Gourmet Food"
+    },
+    {
+      "value": "Hand Sanitizers",
+      "label": "Hand Sanitizers"
+    },
+    {
+      "value": "Handbags",
+      "label": "Handbags"
+    },
+    {
+      "value": "Health and Personal Care",
+      "label": "Health and Personal Care"
+    },
+    {
+      "value": "Home and Garden",
+      "label": "Home and Garden"
+    },
+    {
+      "value": "Household Staples",
+      "label": "Household Staples"
+    },
+    {
+      "value": "Industrial and Scientific Supply",
+      "label": "Industrial and Scientific Supply"
+    },
+    {
+      "value": "Jewelry",
+      "label": "Jewelry"
+    },
+    {
+      "value": "Kindle Accessories",
+      "label": "Kindle Accessories"
+    },
+    {
+      "value": "Kitchen",
+      "label": "Kitchen"
+    },
+    {
+      "value": "Luggage and Travel Accessories",
+      "label": "Luggage and Travel Accessories"
+    },
+    {
+      "value": "Mobile and Accessories",
+      "label": "Mobile and Accessories"
+    },
+    {
+      "value": "Movies and DVD",
+      "label": "Movies and DVD"
+    },
+    {
+      "value": "Music",
+      "label": "Music"
+    },
+    {
+      "value": "Musical Instruments",
+      "label": "Musical Instruments"
+    },
+    {
+      "value": "Office Products",
+      "label": "Office Products"
+    },
+    {
+      "value": "Packaged Food",
+      "label": "Packaged Food"
+    },
+    {
+      "value": "Pet Products",
+      "label": "Pet Products"
+    },
+    {
+      "value": "Shoes",
+      "label": "Shoes"
+    },
+    {
+      "value": "Software",
+      "label": "Software"
+    },
+    {
+      "value": "Sports and Outdoors",
+      "label": "Sports and Outdoors"
+    },
+    {
+      "value": "Sunglasses and Eyewear",
+      "label": "Sunglasses and Eyewear"
+    },
+    {
+      "value": "Tools and Home Improvement",
+      "label": "Tools and Home Improvement"
+    },
+    {
+      "value": "Toys and Games",
+      "label": "Toys and Games"
+    },
+    {
+      "value": "Video Games",
+      "label": "Video Games"
+    },
+    {
+      "value": "Watches",
+      "label": "Watches"
+    }
+  ]
