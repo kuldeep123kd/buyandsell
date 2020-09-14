@@ -12,6 +12,7 @@ function App() {
   const [token, setToken] = React.useState();
   const [showcategories, setShowcategories] = React.useState(false);
   const [imgUrl, setImgUrl] = React.useState('');
+  const [formData, setFormData] = React.useState([]);
   // const [userInfo, setUserInfo] = React.useState({username: '', profile_pic: ''})
 
   const showCat = () => {
@@ -38,7 +39,7 @@ function App() {
         refresh_token: refresh
       })
       .then(resp => {
-        console.log(resp);
+        // console.log(resp);
         if (resp.status === 200) {
           ModifyToken(resp.data.access_token, refreshLocation)
         }
@@ -106,7 +107,7 @@ function App() {
     const interval = setInterval(()=>{
       RefreshToken(token)
       console.log("APP RELOADED Token")
-    },3500*1000)  
+    },60*1000*50)  
 
     return () => clearInterval(interval)
     
@@ -115,7 +116,7 @@ function App() {
   return (
     <>
     <TOKEN_HANDLER.Provider
-      value={{getToken, ModifyToken, DeleteToken, showCat, showcategories, imgUrl, setImgUrl}}
+      value={{getToken, ModifyToken, DeleteToken, showCat, showcategories, imgUrl, setImgUrl, formData, setFormData}}
     >
       <Routes />
     </TOKEN_HANDLER.Provider>
