@@ -11,6 +11,8 @@ import SellerForm from './containers/Seller/SellerForm/SellerForm';
 import SellerDashboard from './containers/Seller/SellerDashboard/SellerDashboard';
 import NoMatch from './components/404/404';
 import AddProduct from './containers/Seller/AddProduct/AddProduct';
+import AccountSettings from './containers/UserProfile/AccountSettings/AccountSettings';
+import Verification from './containers/UserProfile/Verification/Verification';
 
 const asyncLogin = asyncComponent(() => {
   return import('./containers/Login/Login');
@@ -34,6 +36,8 @@ class Routes extends React.Component {
           <Route path="/addproduct" component={AddProduct} />
           <Route path="/sellerform" component={SellerForm} />
           <Route path="/productdetail" component={ProductDetail} />
+          <Route path="/accountsettings" component={AccountSettings} />
+          <Route exact path="/verification" component={Verification} />
           <Route path="*" component={NoMatch} />
         </Switch>
       </ScrollToTop>

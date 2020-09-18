@@ -12,7 +12,7 @@ function App() {
   const [token, setToken] = React.useState();
   const [showcategories, setShowcategories] = React.useState(false);
   const [imgUrl, setImgUrl] = React.useState('');
-  const [formData, setFormData] = React.useState([]);
+  const [product, setFormProduct] = React.useState([]);
   // const [userInfo, setUserInfo] = React.useState({username: '', profile_pic: ''})
 
   const showCat = () => {
@@ -116,7 +116,7 @@ function App() {
   return (
     <>
     <TOKEN_HANDLER.Provider
-      value={{getToken, ModifyToken, DeleteToken, showCat, showcategories, imgUrl, setImgUrl, formData, setFormData}}
+      value={{getToken, ModifyToken, DeleteToken, showCat, showcategories, imgUrl, setImgUrl, product, setFormProduct}}
     >
       <Routes />
     </TOKEN_HANDLER.Provider>

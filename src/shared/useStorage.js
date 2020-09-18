@@ -8,7 +8,7 @@ const useStorage = (file) => {
   const [error, setError] = useState(null);
   const [url, setUrl] = useState(null);
 
-  const {setImgUrl, formData} = React.useContext(TOKEN_HANDLER);
+  const {setImgUrl, product} = React.useContext(TOKEN_HANDLER);
 
 
   useEffect(() => {
@@ -30,13 +30,10 @@ const useStorage = (file) => {
       setUrl(url);
       setImgUrl(url);
       await Axios.post('https://buysell-612c1.firebaseio.com/addproduct.json?auth=' + token, {
-        userId: uId,
+        id: uId,
         data: {
           imgurl: url,
-          productName: formData.productName,
-          description: formData.description,
-          pcategory: formData.pcategory,
-          price: formData.price,
+          product
         }
         })
       .then(resp => {
@@ -52,7 +49,7 @@ const useStorage = (file) => {
     });
 
     
-  }, [file, setImgUrl, formData]);
+  }, [file, setImgUrl, product]);
 
   return { progress, url, error };
 }

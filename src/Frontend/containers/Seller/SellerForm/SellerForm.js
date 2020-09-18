@@ -134,7 +134,7 @@ const SellerForm = () => {
       // if form validation is successful, make an API call
       const formData = {
         seller: {
-          userId: userId,
+          id: userId,
           data: {
             buscompName: sellerForm.buscompName,
             storeName: sellerForm.storeName,
