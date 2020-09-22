@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 import {Form, FormControl, Button } from 'react-bootstrap';
 
 import { TOKEN_HANDLER } from '../../../shared/TOKEN_HANDLER';
-import axios from "axios";
 import './Header.scss';
 
 export default class Header extends React.Component {
 
   constructor(){
     super();
-
     this.state = {
       displayMenu: false,
       displayUser: false,
@@ -80,11 +78,10 @@ export default class Header extends React.Component {
   //   }
   // }
 
-
 render() {
   return (
     <>
-    <div className="nav-bar d-flex align-items-center">
+    <div className="nav-bar d-flex align-items-center" id="top-nav-bar">
       <div className="container">
         <div className="row">
           <div className="col-lg-2 col-sm-3 col-3 order-1 pl-0  search-inp-parent d-flex">
@@ -136,7 +133,7 @@ render() {
                       <span className="d-block text-left" onClick={this.showUserDropdownMenu}><i className="fa fa-user-circle" aria-hidden="true"></i>User</span>
                       { this.state.displayUser ? (
                         <ul className={`prod-supl-list ${this.state.displayUser ? "active" : "" }`}>
-                          <li>Your Account</li>
+                          <li className="join-service"><Link to="/youraccount" className="d-block text-left" >Your Account</Link></li>
                           <li>Your Orders</li>
                           {/* <li onClick={() => this.resetPassword()}>Reset Password</li> */}
                           <li className="join-service"><Link className="d-block text-left" to="/sellerpage">Your Seller Account</Link></li>

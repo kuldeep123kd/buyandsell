@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {TextField} from '@material-ui/core';
 import {ThemeProvider} from '@material-ui/core';
-import {THEME, labelProps, inputProps} from '../../../shared/THEME';
+import {THEME} from '../../../shared/THEME';
 import Button from '@material-ui/core/Button';
 import './SignForm.scss';
 import Axios from 'axios';
@@ -190,6 +190,7 @@ const SignupForm = () => {
         email: signup.email,
         password: signup.password,
         confirm_password: signup.confirmPassword,
+        displayName: signup.firstName + ' ' + signup.lastName,
         returnSecureToken: true
       })
       .then(resp => {
@@ -248,8 +249,6 @@ const SignupForm = () => {
                             variant="outlined"
                             label="First Name"
                             error={signup.firstNameError || signup.serverError ? true : false}
-                            InputLabelProps = {labelProps}
-                            InputProps={inputProps}
                             value={signup.firstName}
                             onChange={e => setSignup({...signup,firstName: e.target.value})}
                           />                
@@ -261,8 +260,6 @@ const SignupForm = () => {
                             label="Last Name"
                             error={signup.lastNameError || signup.serverError? true : false}
                             required
-                            InputLabelProps = {labelProps}
-                            InputProps={inputProps}
                             value={signup.lastName}
                             onChange={e => setSignup({...signup,lastName: e.target.value})}
                           />                
@@ -278,8 +275,6 @@ const SignupForm = () => {
                     type="email"
                     color="primary"
                     error={signup.emailError || signup.serverError? true : false}
-                    InputLabelProps={labelProps}
-                    InputProps={inputProps}
                     variant="outlined"
                     value={signup.email}
                     onChange={e => setSignup({...signup,email: e.target.value})}
@@ -325,12 +320,10 @@ const SignupForm = () => {
                     variant="outlined"
                     required
                     helperText={signup.phoneError}
-                    InputProps={inputProps}
                     error={signup.phoneError || signup.serverError? true : false}
                     style={{
                         marginBottom: signup.phoneError ? '20px': ''
                     }}
-                    InputLabelProps={labelProps}
                     value={signup.phone}
                     onChange={e => setSignup({...signup,phone: e.target.value})}
                   >
@@ -346,8 +339,6 @@ const SignupForm = () => {
                 type="password"
                 required
                 error={signup.passwordError || signup.serverError? true : false}
-                InputProps={inputProps}
-                InputLabelProps={labelProps}
                 label="Password"
                 variant="outlined"
                 value={signup.password}
@@ -373,8 +364,6 @@ const SignupForm = () => {
                 className={classes.root}
                 type="password"
                 required
-                InputProps={inputProps}
-                InputLabelProps={labelProps}
                 variant="outlined"
                 label="Confirm Password"
                 error={signup.cPasswordError || signup.serverError ? true : false}

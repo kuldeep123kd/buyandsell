@@ -5,7 +5,7 @@ import {ThemeProvider} from '@material-ui/core/styles';
 import '../SignupForm/SignForm.scss';
 import { Link, Redirect } from 'react-router-dom';
 import Axios from 'axios'
-import {THEME, labelProps, inputProps} from '../../../shared/THEME';
+import {THEME} from '../../../shared/THEME';
 import {TOKEN_HANDLER} from '../../../shared/TOKEN_HANDLER';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -115,8 +115,6 @@ const LoginForm = (props) => {
                 variant="outlined"
                 color = "primary"
                 type="email"
-                InputProps={inputProps}
-                InputLabelProps = {labelProps}
               />
             </div>
             <div className="form-group">
@@ -130,8 +128,6 @@ const LoginForm = (props) => {
                 className={classes.root}
                 variant="outlined"
                 color="primary"
-                InputProps={inputProps}
-                InputLabelProps = {labelProps}
               />
             </div>
             <div className="form-group">

@@ -12,6 +12,7 @@ import { TOKEN_HANDLER } from '../../../../shared/TOKEN_HANDLER';
 import {THEME} from '../../../../shared/THEME';
 import Axios from 'axios';
 import { Button, ThemeProvider } from '@material-ui/core';
+import ProgressLoader from '../../../components/ProgressLoader/ProgressLoader';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,13 +66,12 @@ const SellerForm = () => {
 
   const classes = useStyles();
 
-  // const classes1 = uppper();
-
   const {getToken} = React.useContext(TOKEN_HANDLER);
 
   // const [option, setOption] = React.useState('');
   const [sellerForm, setSellerForm] = React.useState(initialState);
   const [formSubmit, setFormSubmit] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const validateForm = () => {
     let initialError = {
@@ -130,6 +130,7 @@ const SellerForm = () => {
     // localStorage.clear()
     const res = validateForm();
     if (res) {
+      setIsLoading(true);
       let userId = localStorage.getItem('userId');
       // if form validation is successful, make an API call
       const formData = {
@@ -153,6 +154,7 @@ const SellerForm = () => {
         if (resp.status === 200) {
           console.log(resp.data);
           setFormSubmit(true);
+          setIsLoading(false);
         } 
       })
       .catch(err => {
@@ -189,6 +191,7 @@ const SellerForm = () => {
       (formSubmit)? <Redirect to={`/sellerdashboard`} />
       : 
       <>
+      <ProgressLoader isTrue={isLoading} />
       <Header />
         <div className="main-content">
           <SubHeader />

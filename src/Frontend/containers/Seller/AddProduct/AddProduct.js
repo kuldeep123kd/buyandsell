@@ -4,7 +4,6 @@ import SubHeader from '../../../components/Header/SubHeader/SubHeader';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import { TOKEN_HANDLER } from '../../../../shared/TOKEN_HANDLER';
 import imageCompression from 'browser-image-compression';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,7 +12,7 @@ import defaultimg from '../../../../assets/images/no-image-default.png';
 import {THEME} from '../../../../shared/THEME';
 import { Button, ThemeProvider } from '@material-ui/core';
 import './AddProduct.scss';
-
+import ProgressLoader from '../../../components/ProgressLoader/ProgressLoader';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,6 +60,7 @@ const AddProduct = () => {
   // const [imgSrc, setImgSrc] = useState(null);
   const [uploadfile, setUploadFile] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = React.useState(initialState);
   const { imgUrl, setFormProduct } = React.useContext(TOKEN_HANDLER);
   const types = ['image/png', 'image/jpeg', 'image/jpg'];
@@ -72,7 +72,6 @@ const AddProduct = () => {
       console.log('originalFile instanceof Blob', selected instanceof Blob); // true
       console.log(`originalFile size ${selected.size / 1024 / 1024} MB`);
       console.log(selected);
-
       var reader = new FileReader();
       reader.readAsDataURL(selected);
 
@@ -103,7 +102,6 @@ const AddProduct = () => {
         setFile(selected);
       }
 
-      
       setError('');
     } else {
       setFile(null);
@@ -161,43 +159,49 @@ const AddProduct = () => {
 
     const res = validateForm();
     if (res) {
-      console.log("file-uplloaded"+imgUrl);
-        setUploadFile(file);
-        setFormProduct({
-          name: product.name,
-          description: product.description,
-          category: product.category,
-          price: product.price,
-        });
+      setIsLoading(true);
+      console.log("file-uplloaded");
+      setUploadFile(file);
+      setFormProduct({
+        name: product.name,
+        description: product.description,
+        category: product.category,
+        price: product.price,
+      });
     };
     
   }
 
-  // React.useEffect(() => {
-    // if (uploadfile) {
-    //   let clearState = {
-    //     name: '',
-    //     category: '',
-    //     description: '',
-    //     image: '',
-    //     price: '',
-    //     panNumber: '',
-    //     nameError: false,
-    //     categoryError: false,
-    //     imageError: false,
-    //     descriptionError: false,
-    //     priceError: null,
-    //     panNumberError: null,
-    //     error: false,
-    //     serverError: '',
-    //   }
-    //   console.log("state clear");
-    //   setProduct({...product, ...clearState});
-    // }
-  // }, [product]);
+  React.useEffect(() => {
+      let clearState = {
+        name: '',
+        category: '',
+        description: '',
+        image: '',
+        price: '',
+        panNumber: '',
+        nameError: false,
+        categoryError: false,
+        imageError: false,
+        descriptionError: false,
+        priceError: null,
+        panNumberError: null,
+        error: false,
+        serverError: '',
+      }
+      if(imgUrl) {
+        setIsLoading(false);
+        setProduct({...product, ...clearState});
+      }
+  }, [imgUrl]);
+
+  const removeImage = () => {
+    setProduct({...product, image: ''});
+  }
 
   return (
     <>
+    <ProgressLoader isTrue={isLoading} />
     <Header />
       <div className="main-content">
         <SubHeader /> 
@@ -206,84 +210,96 @@ const AddProduct = () => {
             <div className="add-products-form">
               <h1>Add product</h1>
               <form className="" noValidate autoComplete="off" onSubmit={formHandling}>
-                <div className="addproduct-inputs product-inputs d-flex align-items-center">
-                  <TextField 
-                    className={classes.root} 
-                    id="outlined-basic" 
-                    label="Product Name" 
-                    variant="outlined" 
-                    error={product.nameError ? true : false}
-                    onBlur={product.nameError ? validateForm : null}
-                    value={product.name}
-                    onChange={e => setProduct({...product, name: e.target.value})}
-                  />
-                  <img className="changelaginfo" src={infoicon} alt="info" />
-                </div>
-                <div className="addproduct-inputs product-inputs d-flex align-items-center">
-                  <input className="d-none" type="file" id="fileinput" onChange={handleChange} />
-                  <div className="uploaded-img">
-                    <img src={product.image ? product.image : defaultimg} className="w-100 h-100" alt="..." />
+                <ThemeProvider theme={THEME}>
+                  <div className="addproduct-inputs product-inputs d-flex align-items-center">
+                    <TextField 
+                      className={classes.root} 
+                      id="outlined-basic" 
+                      label="Product Name" 
+                      variant="outlined" 
+                      error={product.nameError ? true : false}
+                      onBlur={product.nameError ? validateForm : null}
+                      value={product.name}
+                      onChange={e => setProduct({...product, name: e.target.value})}
+                    />
+                    <img className="changelaginfo" src={infoicon} alt="info" />
                   </div>
-                  <Button className="add-image-btn" onClick={uploadClick} variant="outlined" type="button" color="primary">
-                    Select Image
-                  </Button>
-                  { error && <div className="error">{ error }</div>}
-                  <div className="d-none">
-                    { uploadfile && <ProgressBar file={uploadfile} setFile={setUploadFile} /> }
+                  <div className="addproduct-inputs product-inputs d-flex align-items-center">
+                    <input className="d-none" type="file" id="fileinput" onChange={handleChange} />
+                    <div className="uploaded-img">
+                      <img src={product.image ? product.image : defaultimg} className="w-100 h-100" alt="..." />
+                    </div>
+                    <div className="add-image-btn">
+                      {
+                        product.image ? 
+                          (<Button onClick={removeImage} variant="outlined" type="button" color="primary">
+                            Remove Image
+                          </Button>)
+                        :
+                          (<Button onClick={uploadClick} variant="outlined" type="button" color="primary">
+                            Select Image
+                          </Button>)
+                      
+                      }
+                      { error && <div className="error">{ error }</div>}
+                    </div>
+                    <div className="d-none">
+                      { uploadfile && <ProgressBar file={uploadfile} setFile={setUploadFile} /> }
+                    </div>
                   </div>
-                </div>
-                <div className="addproduct-inputs d-flex align-items-center">
-                  <TextField
-                    className={classes.root}
-                    id="outlined-basic"
-                    select
-                    label="Select Product Category"
-                    error={product.categoryError ? true : false}
-                    onBlur={product.categoryError ? validateForm : null}
-                    value={product.category}
-                    onChange={e => setProduct({...product, category: e.target.value})}
-                    variant="outlined"
-                  >
-                    {Options.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                  <img className="changelaginfo" src={infoicon} alt="info" />
-                </div>
-                <div className="addproduct-inputs d-flex align-items-center">
-                  <TextField 
-                    className={classes.root} 
-                    id="outlined-basic" 
-                    label="Product Description" 
-                    variant="outlined" 
-                    error={product.descriptionError ? true : false}
-                    onBlur={product.descriptionError ? validateForm : null}
-                    value={product.description}
-                    onChange={e => setProduct({...product, description: e.target.value})}
-                  />
-                  <img className="changelaginfo" src={infoicon} alt="info" />
-                </div>
-                <div className="addproduct-inputs d-flex align-items-center">
-                  <TextField 
-                    className={classes.root} 
-                    id="outlined-basic" 
-                    type="number"
-                    label="Price" 
-                    variant="outlined" 
-                    error={product.priceError ? true : false}
-                    onBlur={product.priceError ? validateForm : null}
-                    value={product.price}
-                    onChange={e => setProduct({...product, price: e.target.value})}
-                  />
-                  <img className="changelaginfo" src={infoicon} alt="info" />
-                </div>
-                <div className="form-group text-center">
-                  <Button variant="contained" type="submit" color="primary">
-                    { uploadfile ? <CircularProgress color="secondary" /> : "Submit"}
-                  </Button>
-                </div>
+                  <div className="addproduct-inputs d-flex align-items-center">
+                    <TextField
+                      className={classes.root}
+                      id="outlined-basic"
+                      select
+                      label="Select Product Category"
+                      error={product.categoryError ? true : false}
+                      onBlur={product.categoryError ? validateForm : null}
+                      value={product.category}
+                      onChange={e => setProduct({...product, category: e.target.value})}
+                      variant="outlined"
+                    >
+                      {Options.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                    <img className="changelaginfo" src={infoicon} alt="info" />
+                  </div>
+                  <div className="addproduct-inputs d-flex align-items-center">
+                    <TextField 
+                      className={classes.root} 
+                      id="outlined-basic" 
+                      label="Product Description" 
+                      variant="outlined" 
+                      error={product.descriptionError ? true : false}
+                      onBlur={product.descriptionError ? validateForm : null}
+                      value={product.description}
+                      onChange={e => setProduct({...product, description: e.target.value})}
+                    />
+                    <img className="changelaginfo" src={infoicon} alt="info" />
+                  </div>
+                  <div className="addproduct-inputs d-flex align-items-center">
+                    <TextField 
+                      className={classes.root} 
+                      id="outlined-basic" 
+                      type="number"
+                      label="Price" 
+                      variant="outlined" 
+                      error={product.priceError ? true : false}
+                      onBlur={product.priceError ? validateForm : null}
+                      value={product.price}
+                      onChange={e => setProduct({...product, price: e.target.value})}
+                    />
+                    <img className="changelaginfo" src={infoicon} alt="info" />
+                  </div>
+                  <div className="form-group text-center add-sbmt-btn">
+                    <Button variant="contained" type="submit" color="primary">
+                      { uploadfile ? <div className="loadingspinner" ></div> : "Submit"}
+                    </Button>
+                  </div>
+                </ThemeProvider>
               </form>
             </div>
           </div>

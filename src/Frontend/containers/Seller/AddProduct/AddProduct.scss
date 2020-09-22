@@ -23,6 +23,36 @@
   margin-left: 20px !important;
 }
 
+.loadingspinner {
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  border: 3.5px solid transparent;
+  // border-color: #eee;
+  // border-top-color: #3E67EC;
+  border-color: white;
+  border-top-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: loadingspin 1s linear infinite;
+  animation: loadingspin 1s linear infinite;
+}
+.add-sbmt-btn {
+  button {
+    width: 85px;
+    height: 36px;
+  }
+}
+@-webkit-keyframes loadingspin {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+@keyframes loadingspin {
+  100% {
+    transform: rotate(360deg)
+  }
+}
+
 @media screen and  (max-width:991px) and (min-width: 768px) {
   .add-products-form {
     width: 60%;

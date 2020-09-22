@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+// import Progress from '../../../components/ProgressLoader/Progress';
 
 const AccountSettings = () => {
 
@@ -21,7 +22,8 @@ const AccountSettings = () => {
 
   return (
     <>
-      <div>
+      {/* <Progress isAnimating={document.readyState === 'complete' ? false : true} /> */}
+      <div className="accountsettings">
         <h1>Verify Email</h1>
         <button type="button" onClick={sendLink}>Send</button>
       </div>
