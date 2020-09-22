@@ -7,6 +7,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// html {
+//   filter: invert(100%) hue-rotate(180deg);
+// }
+
+// img, picture, video {
+//   filter: invert(100%) hue-rotate(180deg);
+// }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -25,7 +33,5 @@ button {
 div {
   // display: block;
   position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }

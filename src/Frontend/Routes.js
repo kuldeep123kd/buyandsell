@@ -13,6 +13,9 @@ import NoMatch from './components/404/404';
 import AddProduct from './containers/Seller/AddProduct/AddProduct';
 import AccountSettings from './containers/UserProfile/AccountSettings/AccountSettings';
 import Verification from './containers/UserProfile/Verification/Verification';
+import Progress from "./components/ProgressLoader/Progress";
+import UserProfile from "./containers/UserProfile/UserProfile";
+import LoginSettings from "./containers/UserProfile/LoginSettings/LoginSettings";
 
 const asyncLogin = asyncComponent(() => {
   return import('./containers/Login/Login');
@@ -22,27 +25,33 @@ const asyncSignup = asyncComponent(() => {
   return import('./containers/Signup/Signup');
 });
 
-class Routes extends React.Component {
+const Routes = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  render () {
-    return (
-      <ScrollToTop>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/login" component={asyncLogin} />
-          <Route path="/signup" component={asyncSignup} />
-          <Route path="/sellerpage" component={SellerPages} />
-          <Route path="/sellerdashboard" component={SellerDashboard} />
-          <Route path="/addproduct" component={AddProduct} />
-          <Route path="/sellerform" component={SellerForm} />
-          <Route path="/productdetail" component={ProductDetail} />
-          <Route path="/accountsettings" component={AccountSettings} />
-          <Route exact path="/verification" component={Verification} />
-          <Route path="*" component={NoMatch} />
-        </Switch>
-      </ScrollToTop>
-    )
-  }
-}
+  window.onload = function () {
+    setIsLoading(false);
+  };
+
+  return (
+    <ScrollToTop>
+      <Progress isAnimating={isLoading} />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/login" component={asyncLogin} />
+        <Route path="/signup" component={asyncSignup} />
+        <Route path="/sellerpage" component={SellerPages} />
+        <Route path="/sellerdashboard" component={SellerDashboard} />
+        <Route path="/addproduct" component={AddProduct} />
+        <Route path="/sellerform" component={SellerForm} />
+        <Route path="/productdetail" component={ProductDetail} />
+        <Route path="/accountsettings" component={AccountSettings} />
+        <Route exact path="/verification" component={Verification} />
+        <Route path="/youraccount/loginsettings" component={LoginSettings} />
+        <Route path="/youraccount" component={UserProfile} />
+        <Route path="*" component={NoMatch} />
+      </Switch>
+    </ScrollToTop>
+  );
+};
 
 export default Routes;

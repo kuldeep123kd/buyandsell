@@ -6,6 +6,7 @@ import Routes from './Frontend/Routes';
 import {TOKEN_HANDLER} from './shared/TOKEN_HANDLER';
 // import {BASEURL} from './shared/BASEURL'; 
 import axios from 'axios'
+import Axios from "axios";
 
 function App() {
 
@@ -112,6 +113,28 @@ function App() {
     return () => clearInterval(interval)
     
   },[token])
+
+
+  React.useEffect(() => {
+    (async () => {
+      let tk = localStorage.getItem("token");
+      if (tk) {
+        await Axios.post(
+          `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
+          {
+            idToken: tk,
+          }
+        )
+          .then((resp) => {
+            console.log(resp);
+          })
+          .catch((err) => {
+            console.log(err);
+            console.log(err.response);
+          });
+      }
+    })();
+  }, []);
 
   return (
     <>

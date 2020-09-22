@@ -1,15 +1,7 @@
 @mixin translate($trans) {
-  -webkit-transform: $trans;
-  -moz-transform: $trans;
-  -ms-transform: $trans;
-  -o-transform: $trans;
   transform: $trans;
 }
 
 @mixin transition($transition) {
-  -webkit-transition: $transition;
-  -moz-transition: $transition;
-  -ms-transition: $transition;
-  -o-transition: $transition;
   transition: $transition;
 }
