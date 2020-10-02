@@ -1,7 +1,6 @@
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
-import './assets/css/fontawesome/css/fontawesome-all.css';
+import "react-app-polyfill/stable";
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel';
 import './App.scss';

@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import {Form, FormControl, Button } from 'react-bootstrap';
-
+import LocalMallRoundedIcon from '@material-ui/icons/LocalMallRounded';
+import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 import { TOKEN_HANDLER } from '../../../shared/TOKEN_HANDLER';
 import './Header.scss';
 
@@ -119,18 +122,18 @@ render() {
                   </ul>):
                   (null)}
                 </div>
-                <Button className="search-btn" variant="outline-success"><i className="fa fa-search" aria-hidden="true"></i></Button>
+                  <Button className="search-btn" variant="outline-success"><SearchRoundedIcon /></Button>
               </div>
             </Form>
           </div>
           <div className="col-lg-4 col-9 order-lg-3 order-2 quick-options text-right pr-0  search-inp-parent">
             <div className="d-flex align-items-center justify-content-end">
               <div className="user-signupin d-flex align-items-center">
-                {(this.context.getToken()) ? (null) : (<i className="fa fa-user-circle" aria-hidden="true"></i>)}
+                  {(this.context.getToken()) ? (null) : (<AccountCircleRoundedIcon id="user-icn" />)}
                 {
                   (this.context.getToken()) ? (
                     <div className="user-signin">
-                      <span className="d-block text-left" onClick={this.showUserDropdownMenu}><i className="fa fa-user-circle" aria-hidden="true"></i>User</span>
+                        <span className="d-block text-left" onClick={this.showUserDropdownMenu}><AccountCircleRoundedIcon id="user-icn" />User</span>
                       { this.state.displayUser ? (
                         <ul className={`prod-supl-list ${this.state.displayUser ? "active" : "" }`}>
                           <li className="join-service"><Link to="/youraccount" className="d-block text-left" >Your Account</Link></li>
@@ -166,12 +169,12 @@ render() {
                 <span className="d-block">Messages</span>
               </Link> */}
               <Link className="text-center orders" to="/">
-                <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+                  <LocalMallRoundedIcon color="secondary" />
                 <span className="d-block">Orders</span>
               </Link>
               <Link to="/" className="cart">
                 <div className="user-cart position-relative">
-                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <ShoppingCartRoundedIcon />
                   <div className="user-cart-items">
                     <span>0</span>
                   </div>

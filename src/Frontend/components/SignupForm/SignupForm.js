@@ -202,6 +202,29 @@ const SignupForm = () => {
           // localStorage.setItem('expiresIn', resp.data.expiresIn);
           localStorage.setItem('refreshToken', resp.data.refreshToken);
           localStorage.setItem("credentials",JSON.stringify({...signup,serverError: ''}));
+          // if form validation is successful, make an API call
+          const formData = {
+            user: {
+              id: resp.data.localId,
+              data: {
+                name: resp.data.displayName,
+                email: resp.data.email,
+                mobile: signup.phone,
+              }
+            }
+          }
+
+          Axios.post('https://buysell-612c1.firebaseio.com/usersdata.json?auth=' + resp.data.idToken, formData)
+            .then(resp => {
+              console.log(resp);
+              if (resp.status === 200) {
+                console.log(resp);
+                console.log(resp.data);
+              }
+            }).catch(err => {
+              console.log(err);
+              console.log(err.response);
+            })
         } 
       })
       .catch(err => {

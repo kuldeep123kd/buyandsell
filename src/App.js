@@ -14,7 +14,10 @@ function App() {
   const [showcategories, setShowcategories] = React.useState(false);
   const [imgUrl, setImgUrl] = React.useState('');
   const [product, setFormProduct] = React.useState([]);
-  // const [userInfo, setUserInfo] = React.useState({username: '', profile_pic: ''})
+  const [userInfo, setUserInfo] = React.useState({
+    uId: '',
+    emailVerified: null
+  });
 
   const showCat = () => {
     setShowcategories(true);
@@ -116,10 +119,10 @@ function App() {
 
 
   React.useEffect(() => {
-    (async () => {
+    // (async () => {
       let tk = localStorage.getItem("token");
       if (tk) {
-        await Axios.post(
+        Axios.post(
           `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
           {
             idToken: tk,
@@ -127,19 +130,26 @@ function App() {
         )
           .then((resp) => {
             console.log(resp);
+            if (resp.status === 200) {
+              const udata = resp.data.users["0"];
+              setUserInfo({
+                uId: udata.localId,
+                emailVerified: udata.emailVerified
+              });
+            }
           })
           .catch((err) => {
             console.log(err);
             console.log(err.response);
           });
       }
-    })();
+    // })();
   }, []);
 
   return (
     <>
     <TOKEN_HANDLER.Provider
-      value={{getToken, ModifyToken, DeleteToken, showCat, showcategories, imgUrl, setImgUrl, product, setFormProduct}}
+        value={{ getToken, ModifyToken, DeleteToken, showCat, showcategories, imgUrl, setImgUrl, product, setFormProduct, userInfo }}
     >
       <Routes />
     </TOKEN_HANDLER.Provider>
