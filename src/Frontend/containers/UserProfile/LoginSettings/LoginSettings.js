@@ -14,6 +14,10 @@ import Header from "../../../components/Header/Header";
 import SubHeader from "../../../components/Header/SubHeader/SubHeader";
 import ProgressLoader from "../../../components/ProgressLoader/ProgressLoader";
 import Login from "../../Login/Login";
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+
+import PasswordChange from './PasswordChange';
+import { CircularProgress } from "@material-ui/core";
 
 const initialState = {
   email: "",
@@ -53,10 +57,40 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginSettings = () => {
   const classes = useStyles();
-
+  const { userInfo } = React.useContext(TOKEN_HANDLER);
   const [login, setLogin] = React.useState(initialState);
+  const [userData, setUserData] = React.useState({
+    user: [],
+    isLoading: true
+  });
+  const [showModel, setShowModel] = React.useState(false);
 
   const formSubmit = () => {};
+
+  const showPasswordChangeModel = () => {
+    setShowModel(true);
+    document.getElementById("root").style.overflow = "hidden";
+  }
+
+  React.useEffect(() => {
+    let tk = localStorage.getItem("token");
+    if (tk) {
+      Axios.get('https://buysell-612c1.firebaseio.com/usersdata.json?auth=' + tk)
+        .then((resp) => {
+          console.log(resp);
+          if (resp.status === 200) {
+            setUserData({
+              user: resp.data
+            });
+          }
+        })
+        .catch((err) => {
+          console.log("From Login" + err);
+          console.log("From Login" + err.response);
+        });
+    }
+  }, []);
+
 
   return (
     <>
@@ -64,74 +98,89 @@ const LoginSettings = () => {
       <Header />
       <div className="main-content">
         <SubHeader />
-        <div className="loginsettings">
-          <form noValidate autoComplete="off" onSubmit={formSubmit}>
-            <ThemeProvider theme={THEME}>
-              <div className="form-group">
-                <TextField
-                  label="Name"
-                  type="text"
-                  required
-                  value={login.name}
-                  onChange={(e) => setLogin({ ...login, name: e.target.value })}
-                  error={login.error}
-                  className={classes.root}
-                  variant="outlined"
-                  color="primary"
-                />
-              </div>
-              <div className="form-group">
-                <TextField
-                  label="Email Address"
-                  type="email"
-                  error={login.error}
-                  required
-                  value={login.email}
-                  onChange={(e) =>
-                    setLogin({ ...login, email: e.target.value })
+        <div className="container">
+          <div className="loginsettings">
+            <form noValidate autoComplete="off" onSubmit={formSubmit}>
+              {!userData.isLoading ? (
+                Object.keys(userData.user).map((ds, key) => {
+                  if (userData.user[ds].user.id === userInfo.uId) {
+                    return (
+                      <ThemeProvider theme={THEME} key={key}>
+                        <div className="form-group d-flex align-items-center">
+                          <TextField
+                            label="Name"
+                            type="text"
+                            required
+                            disabled={true}
+                            value={login.name ? login.name : userData.user[ds].user.data.name}
+                            onChange={(e) => setLogin({ ...login, name: e.target.value })}
+                            error={login.error}
+                            className={classes.root}
+                            variant="outlined"
+                            color="primary"
+                          />
+                          <div className="edit-icn-pad"><CreateOutlinedIcon onClick={() => showPasswordChangeModel()} /></div>
+                        </div>
+                        <div className="form-group d-flex align-items-center">
+                          <TextField
+                            label="Email Address"
+                            type="email"
+                            error={login.error}
+                            required
+                            disabled={true}
+                            value={login.email ? login.email : userData.user[ds].user.data.email}
+                            onChange={(e) =>
+                              setLogin({ ...login, email: e.target.value })
+                            }
+                            className={classes.root}
+                            variant="outlined"
+                            color="primary"
+                          />
+                          <div className="edit-icn-pad"><CreateOutlinedIcon onClick={() => showPasswordChangeModel()} /></div>
+                        </div>
+                        <div className="form-group d-flex align-items-center">
+                          <TextField
+                            label="Password"
+                            type="password"
+                            value="*********"
+                            disabled={true}
+                            className={classes.root}
+                            variant="outlined"
+                            color="primary"
+                          />
+                          <div className="edit-icn-pad"><CreateOutlinedIcon onClick={() => showPasswordChangeModel()} /></div>
+                        </div>
+                        <div className="form-group d-flex align-items-center">
+                          <TextField
+                            className={classes.root}
+                            label="Mobile Number"
+                            variant="outlined"
+                            required
+                            disabled={true}
+                            // helperText={login.phoneError}
+                            error={login.error}
+                            value={login.phone ? login.phone : userData.user[ds].user.data.mobile}
+                            type="phone"
+                            onChange={(e) =>
+                              setLogin({ ...login, phone: e.target.value })
+                            }
+                          ></TextField>
+                          <div className="edit-icn-pad"><CreateOutlinedIcon onClick={() => showPasswordChangeModel()} /></div>
+                        </div>
+                      </ThemeProvider>
+                    );
                   }
-                  className={classes.root}
-                  variant="outlined"
-                  color="primary"
-                />
-              </div>
-              <div className="form-group">
-                <TextField
-                  label="Password"
-                  type="password"
-                  error={login.error}
-                  required
-                  value={login.password}
-                  onChange={(e) =>
-                    setLogin({ ...login, password: e.target.value })
-                  }
-                  className={classes.root}
-                  variant="outlined"
-                  color="primary"
-                />
-              </div>
-              <div className="form-group">
-                <TextField
-                  className={classes.root}
-                  label="Mobile Number"
-                  variant="outlined"
-                  required
-                  // helperText={login.phoneError}
-                  error={login.error}
-                  value={login.phone}
-                  type="phone"
-                  onChange={(e) =>
-                    setLogin({ ...login, phone: e.target.value })
-                  }
-                ></TextField>
-              </div>
-              {/* <div className="form-group text-center">
-                <Button variant="contained" type="submit" color="primary">
-                  Login
-                </Button>
-              </div> */}
-            </ThemeProvider>
-          </form>
+                  return null;
+                })
+              ) : (
+                  <div className="category--loader">
+                    <CircularProgress />
+                  </div>
+                )
+              }
+            </form>
+            <PasswordChange show={showModel} setshow={setShowModel} />
+          </div>
         </div>
       </div>
       <Footer />

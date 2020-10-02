@@ -116,6 +116,16 @@
   width: max-content;
 }
 
+#user-icn{
+  width: 1.3em;
+  height: 1.3em;
+  color: #FFFFFF;
+}
+
+.search-btn svg {
+  color: #FFFFFF;
+}
+
 .user-signin span {
   cursor: pointer;
 }
@@ -150,6 +160,14 @@
   padding-left: 0;
 }
 
+.user-cart {
+  svg {
+    color: #FFFFFF;
+    height: 1.3em;
+    width: 1.3em;
+  }
+}
+
 .user-cart-tprice p {
   margin: 0;
 }
@@ -159,6 +177,14 @@
 .orders,
 .cart {
   padding: 0 15px;
+}
+
+.orders {
+  svg {
+    color: #FFFFFF;
+    width: 1.3em;
+    height: 1.3em;
+  }
 }
 
 .user-cart-items {

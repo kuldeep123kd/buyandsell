@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import YouTubeIcon from '@material-ui/icons/YouTube';
 // import '../../../assets/css/main.css';
 import cardlogo1 from '../../../assets/images/logos_1.png';
 import cardlogo2 from '../../../assets/images/logos_2.png';
@@ -76,11 +80,11 @@ const Footer = () => {
                   <div className="col foot-cont-heading-parent p-0">
                     <h1 className="foot-cont-heading">Follow us on</h1>
                     <div className="social-media-icons">
-                      <Link rel="noopener noreferrer" to="/"><i className="fab fa-facebook-f" aria-hidden="true"></i></Link>
-                      <Link rel="noopener noreferrer" to="/"><i className="fab fa-twitter" aria-hidden="true"></i></Link>
-                      <Link rel="noopener noreferrer" to="/"><i className="fab fa-instagram" aria-hidden="true"></i></Link>
-                      <Link rel="noopener noreferrer" to="/"><i className="fab fa-linkedin-in" aria-hidden="true"></i></Link>
-                      <Link rel="noopener noreferrer" to="/"><i className="fab fa-youtube" aria-hidden="true"></i></Link>
+                      <Link rel="noopener noreferrer" to="/"><FacebookIcon /></Link>
+                      <Link rel="noopener noreferrer" to="/"><TwitterIcon /></Link>
+                      <Link rel="noopener noreferrer" to="/"><InstagramIcon /></Link>
+                      <Link rel="noopener noreferrer" to="/"><LinkedInIcon /></Link>
+                      <Link rel="noopener noreferrer" to="/"><YouTubeIcon /></Link>
                     </div>
                   </div>
                 </div>

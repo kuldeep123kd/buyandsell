@@ -1,0 +1,68 @@
+.password-change {
+  left: 200%;
+  background-color: #ffffff;
+  top: 0;
+  z-index: 101;
+  transition: left 0.4s linear;
+}
+
+.password-change-show {
+  left: 0;
+}
+
+#passwordchange {
+  max-width: 350px;
+  margin: auto;
+  margin-top: 15%;
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.change-pass {
+  margin-bottom: 20px;
+}
+
+.change-pass-msg {
+  font-weight: normal;
+  font-size: 0.8125rem;
+  line-height: 127.7%;
+  color: #212121;
+  padding-top: 0.25rem;
+}
+
+.submit-btns {
+  button {
+    &:first-child {
+      margin-right: 20px;
+    }
+  }
+}
+
+.close-icon {
+  top: 30px;
+  right: 40px;
+  svg {
+    cursor: pointer;
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+.loginsettings {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.edit-icn-pad {
+  padding-left: 15px;
+  svg {
+    cursor: pointer;
+  }
+}
+
+.category--loader {
+  text-align: center;
+  padding: 10%;
+}
