@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
 
 import { TOKEN_HANDLER } from '../../../../shared/TOKEN_HANDLER';
 
@@ -32,7 +33,8 @@ render() {
               <li><Link to="#link">Trade Shows</Link></li> */}
               <li className="main-list-parent">
                 <Link className="main-list" to="#link">
-                  Electronics<i className="fa fa-chevron-down"></i>
+                  Electronics
+                  <ExpandMoreRoundedIcon />
                 </Link>
                 <ul className="categories-menu">
                   <li>
@@ -45,12 +47,12 @@ render() {
                       </li>
                       <li>
                         <Link to="#link">
-                          Launch Box<i className="fa fa-chevron-right"></i>
+                          Launch Box
                         </Link>
                       </li>
                       <li>
                         <Link to="#link">
-                          Bottles<i className="fa fa-chevron-right"></i>
+                          Bottles
                         </Link>
                       </li>
                       <li>
@@ -71,12 +73,12 @@ render() {
                       </li>
                       <li>
                         <Link to="#link">
-                          Launch Box<i className="fa fa-chevron-right"></i>
+                          Launch Box
                         </Link>
                       </li>
                       <li>
                         <Link to="#link">
-                          Bottles<i className="fa fa-chevron-right"></i>
+                          Bottles
                         </Link>
                       </li>
                       <li>
@@ -91,7 +93,8 @@ render() {
               </li>
               <li className="main-list-parent">
                 <Link className="main-list" to="#link">
-                  TV & Appliances<i className="fa fa-chevron-down"></i>
+                  TV & Appliances
+                  <ExpandMoreRoundedIcon />
                 </Link>
                 <ul className="categories-menu">
                   <li>
@@ -104,12 +107,12 @@ render() {
                       </li>
                       <li>
                         <Link to="#link">
-                          Launch Box<i className="fa fa-chevron-right"></i>
+                          Launch Box
                         </Link>
                       </li>
                       <li>
                         <Link to="#link">
-                          Bottles<i className="fa fa-chevron-right"></i>
+                          Bottles
                         </Link>
                       </li>
                       <li>
@@ -124,7 +127,8 @@ render() {
               </li>
               <li className="main-list-parent">
                 <Link className="main-list" to="/">
-                  Men<i className="fa fa-chevron-down"></i>
+                  Men
+                  <ExpandMoreRoundedIcon />
                 </Link>
                 <ul className="categories-menu">
                   <li>
@@ -137,12 +141,12 @@ render() {
                       </li>
                       <li>
                         <Link to="#link">
-                          Launch Box<i className="fa fa-chevron-right"></i>
+                          Launch Box
                         </Link>
                       </li>
                       <li>
                         <Link to="#link">
-                          Bottles<i className="fa fa-chevron-right"></i>
+                          Bottles
                         </Link>
                       </li>
                       <li>
@@ -157,7 +161,8 @@ render() {
               </li>
               <li className="main-list-parent">
                 <Link className="main-list" to="/">
-                  Women<i className="fa fa-chevron-down"></i>
+                  Women
+                  <ExpandMoreRoundedIcon />
                 </Link>
                 <ul className="categories-menu">
                   <li>
@@ -170,12 +175,12 @@ render() {
                       </li>
                       <li>
                         <Link to="#link">
-                          Launch Box<i className="fa fa-chevron-right"></i>
+                          Launch Box
                         </Link>
                       </li>
                       <li>
                         <Link to="#link">
-                          Bottles<i className="fa fa-chevron-right"></i>
+                          Bottles
                         </Link>
                       </li>
                       <li>
@@ -190,7 +195,8 @@ render() {
               </li>
               <li className="main-list-parent">
                 <Link className="main-list" to="/">
-                  Home & Furniture<i className="fa fa-chevron-down"></i>
+                  Home & Furniture
+                  <ExpandMoreRoundedIcon />
                 </Link>
                 <ul className="categories-menu">
                   <li>
@@ -203,12 +209,12 @@ render() {
                       </li>
                       <li>
                         <Link to="#link">
-                          Launch Box<i className="fa fa-chevron-right"></i>
+                          Launch Box
                         </Link>
                       </li>
                       <li>
                         <Link to="#link">
-                          Bottles<i className="fa fa-chevron-right"></i>
+                          Bottles
                         </Link>
                       </li>
                       <li>
@@ -223,7 +229,8 @@ render() {
               </li>
               <li className="main-list-parent">
                 <Link className="main-list" to="/">
-                  Baby & Kids<i className="fa fa-chevron-down"></i>
+                  Baby & Kids
+                  <ExpandMoreRoundedIcon />
                 </Link>
                 <ul className="categories-menu">
                   <li>
@@ -236,12 +243,12 @@ render() {
                       </li>
                       <li>
                         <Link to="#link">
-                          Launch Box<i className="fa fa-chevron-right"></i>
+                          Launch Box
                         </Link>
                       </li>
                       <li>
                         <Link to="#link">
-                          Bottles<i className="fa fa-chevron-right"></i>
+                          Bottles
                         </Link>
                       </li>
                       <li>
@@ -256,7 +263,8 @@ render() {
               </li>
               <li className="main-list-parent">
                 <Link className="main-list" to="/">
-                  Sports, Books & More<i className="fa fa-chevron-down"></i>
+                  Sports, Books & More
+                  <ExpandMoreRoundedIcon />
                 </Link>
                 <ul className="categories-menu">
                   <li>
@@ -269,12 +277,12 @@ render() {
                       </li>
                       <li>
                         <Link to="#link">
-                          Launch Box<i className="fa fa-chevron-right"></i>
+                          Launch Box
                         </Link>
                       </li>
                       <li>
                         <Link to="#link">
-                          Bottles<i className="fa fa-chevron-right"></i>
+                          Bottles
                         </Link>
                       </li>
                       <li>

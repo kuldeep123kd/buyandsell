@@ -16,11 +16,21 @@ import ProgressLoader from '../../components/ProgressLoader/ProgressLoader';
 
 class HomePage extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { 
+      isLoading: false
+    };
+  }
+
   static contextType = TOKEN_HANDLER;
 
   async componentDidMount() {
     let tk = localStorage.getItem("token");
     if(tk) {
+      this.setState({
+        isLoading: true
+      });
       await Axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
         {
           idToken: tk
@@ -28,6 +38,9 @@ class HomePage extends React.Component {
       )
       .then(resp => {
         console.log(resp);
+        this.setState({
+          isLoading: false
+        });
       })
       .catch(err => {
         console.log(err);
@@ -41,7 +54,7 @@ class HomePage extends React.Component {
     if (this.context.getToken()) {
       return (
         <>
-          <ProgressLoader  />
+          <ProgressLoader isTrue={this.state.isLoading} />
           <Header />
           <div className="main-content">
             <SubHeader />
