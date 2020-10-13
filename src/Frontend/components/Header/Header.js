@@ -6,7 +6,7 @@ import LocalMallRoundedIcon from '@material-ui/icons/LocalMallRounded';
 import ShoppingCartRoundedIcon from '@material-ui/icons/ShoppingCartRounded';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
-import { TOKEN_HANDLER } from '../../../shared/TOKEN_HANDLER';
+import { STATE_HANDLER } from '../../../shared/STATE_HANDLER';
 import './Header.scss';
 
 export default class Header extends React.Component {
@@ -27,7 +27,7 @@ export default class Header extends React.Component {
 
   };
 
-  static contextType = TOKEN_HANDLER;
+  static contextType = STATE_HANDLER;
 
   showDropdownMenu(event) {
     event.preventDefault();

@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import Header from '../../../components/Header/Header';
 import SubHeader from '../../../components/Header/SubHeader/SubHeader';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
-import { TOKEN_HANDLER } from '../../../../shared/TOKEN_HANDLER';
+import { STATE_HANDLER } from '../../../../shared/STATE_HANDLER';
 import imageCompression from 'browser-image-compression';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import infoicon from '../../../../assets/images/info_icon.svg';
@@ -13,27 +12,6 @@ import {THEME} from '../../../../shared/THEME';
 import { Button, ThemeProvider } from '@material-ui/core';
 import './AddProduct.scss';
 import ProgressLoader from '../../../components/ProgressLoader/ProgressLoader';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& label.Mui-focused': {
-      color: '#3772FF',
-      backgroundColor: '#fff',
-      padding: '0 5px',
-      marginLeft: '-3.5px'
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#CED4DA',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#3772FF',
-        borderWidth: "1px",
-        boxShadow: '0 0 5px rgba(55, 114, 255, 0.5)',
-      },
-    },
-  },
-}));
 
 const initialState = {
   name: '',
@@ -54,7 +32,6 @@ const initialState = {
 
 const AddProduct = () => {
 
-  const classes = useStyles();
   const Options = require('../../../../shared/Data/productscategory.json');
   const [file, setFile] = useState(null);
   // const [imgSrc, setImgSrc] = useState(null);
@@ -62,7 +39,7 @@ const AddProduct = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = React.useState(initialState);
-  const { imgUrl, setFormProduct } = React.useContext(TOKEN_HANDLER);
+  const { imgUrl, setFormProduct } = React.useContext(STATE_HANDLER);
   const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
   const handleChange = (e) => {
@@ -213,10 +190,8 @@ const AddProduct = () => {
                 <ThemeProvider theme={THEME}>
                   <div className="addproduct-inputs product-inputs d-flex align-items-center">
                     <TextField 
-                      className={classes.root} 
                       id="outlined-basic" 
                       label="Product Name" 
-                      variant="outlined" 
                       error={product.nameError ? true : false}
                       onBlur={product.nameError ? validateForm : null}
                       value={product.name}
@@ -249,15 +224,12 @@ const AddProduct = () => {
                   </div>
                   <div className="addproduct-inputs d-flex align-items-center">
                     <TextField
-                      className={classes.root}
-                      id="outlined-basic"
                       select
                       label="Select Product Category"
                       error={product.categoryError ? true : false}
                       onBlur={product.categoryError ? validateForm : null}
                       value={product.category}
                       onChange={e => setProduct({...product, category: e.target.value})}
-                      variant="outlined"
                     >
                       {Options.map((option) => (
                         <MenuItem key={option.value} value={option.value}>
@@ -269,10 +241,7 @@ const AddProduct = () => {
                   </div>
                   <div className="addproduct-inputs d-flex align-items-center">
                     <TextField 
-                      className={classes.root} 
-                      id="outlined-basic" 
                       label="Product Description" 
-                      variant="outlined" 
                       error={product.descriptionError ? true : false}
                       onBlur={product.descriptionError ? validateForm : null}
                       value={product.description}
@@ -282,11 +251,8 @@ const AddProduct = () => {
                   </div>
                   <div className="addproduct-inputs d-flex align-items-center">
                     <TextField 
-                      className={classes.root} 
-                      id="outlined-basic" 
                       type="number"
                       label="Price" 
-                      variant="outlined" 
                       error={product.priceError ? true : false}
                       onBlur={product.priceError ? validateForm : null}
                       value={product.price}

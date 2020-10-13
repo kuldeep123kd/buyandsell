@@ -4,16 +4,13 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { ThemeProvider } from "@material-ui/core/styles";
 import "./LoginSettings.scss";
-import { Link, Redirect } from "react-router-dom";
 import Axios from "axios";
 import { THEME } from "../../../../shared/THEME";
-import { TOKEN_HANDLER } from "../../../../shared/TOKEN_HANDLER";
-import { makeStyles } from "@material-ui/core/styles";
+import { STATE_HANDLER } from "../../../../shared/STATE_HANDLER";
 import Footer from "../../../components/Footer/Footer";
 import Header from "../../../components/Header/Header";
 import SubHeader from "../../../components/Header/SubHeader/SubHeader";
 import ProgressLoader from "../../../components/ProgressLoader/ProgressLoader";
-import Login from "../../Login/Login";
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 import PasswordChange from './PasswordChange';
@@ -34,33 +31,8 @@ const initialState = {
   isLoading: true
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& label.MuiInputLabel-outlined": {
-      display: "flex",
-    },
-    "& label.Mui-focused": {
-      color: "#3772FF",
-      backgroundColor: "#fff",
-      padding: "0 5px",
-      marginLeft: "-3.5px",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#CED4DA",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#3772FF",
-        borderWidth: "1px",
-        boxShadow: "0 0 5px rgba(55, 114, 255, 0.5)",
-      },
-    },
-  },
-}));
-
 const LoginSettings = () => {
-  const classes = useStyles();
-  const { userInfo } = React.useContext(TOKEN_HANDLER);
+  const { userInfo } = React.useContext(STATE_HANDLER);
   const [login, setLogin] = React.useState(initialState);
   const [showModel, setShowModel] = React.useState(false);
   const [showChangeEmail, setShowChangeEmail] = React.useState(false);
@@ -103,16 +75,16 @@ const LoginSettings = () => {
           if (resp.status === 200) {
             // console.log(resp);
             // console.log(resp.data);
-            Object.keys(resp.data).map((ds) => {
-              if (resp.data[ds].user.id === userInfo.uId) {
+            Object.keys(resp.data).map((id) => {
+              if (resp.data[id].user.id === userInfo.uId) {
                 // console.log(resp.data[ds].user.data.name);
                 setLogin({
                   isLoading: false,
-                  email: resp.data[ds].user.data.email,
-                  name: resp.data[ds].user.data.name,
-                  phone: resp.data[ds].user.data.mobile,
+                  email: resp.data[id].user.data.email,
+                  name: resp.data[id].user.data.name,
+                  phone: resp.data[id].user.data.mobile,
                 });
-                setUserDataParent(ds);
+                setUserDataParent(id);
               }
               return null;
             });
@@ -254,8 +226,6 @@ const LoginSettings = () => {
                       onChange={(e) =>
                         setLogin({ ...login, name: e.target.value })
                       }
-                      className={classes.root}
-                      variant="outlined"
                       color="primary"
                     />
                     <div className="edit-icn-pad">
@@ -293,8 +263,6 @@ const LoginSettings = () => {
                       onChange={(e) =>
                         setLogin({ ...login, email: e.target.value })
                       }
-                      className={classes.root}
-                      variant="outlined"
                       color="primary"
                     />
                     <div className="edit-icn-pad">
@@ -324,8 +292,6 @@ const LoginSettings = () => {
                       type="password"
                       value="*********"
                       disabled={true}
-                      className={classes.root}
-                      variant="outlined"
                       color="primary"
                     />
                     <div className="edit-icn-pad">
@@ -338,9 +304,7 @@ const LoginSettings = () => {
                 <div className="form-group">
                   <div className="d-flex align-items-center">
                     <TextField
-                      className={classes.root}
                       label="Mobile Number"
-                      variant="outlined"
                       required
                       disabled={mobileChangeEnable ? mobileChangeEnable : false}
                       helperText={login.phoneError}

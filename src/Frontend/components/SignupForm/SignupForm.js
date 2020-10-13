@@ -1,12 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect, useHistory} from 'react-router-dom';
 import {TextField} from '@material-ui/core';
 import {ThemeProvider} from '@material-ui/core';
 import {THEME} from '../../../shared/THEME';
 import Button from '@material-ui/core/Button';
 import './SignForm.scss';
 import Axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+} from "@material-ui/core";
+import Input from '@material-ui/core/Input';
+import { STATE_HANDLER } from '../../../shared/STATE_HANDLER';
 
 // import {BASEURL} from '../../../shared/BASEURL'
 // import Notifications from './Notifications';
@@ -31,86 +40,39 @@ const initialState = {
   serverError: '',
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& label.MuiInputLabel-outlined': {
-      display: 'flex'
-    },
-    '& label.Mui-focused': {
-      color: '#3772FF',
-      backgroundColor: '#fff',
-      padding: '0 5px',
-      marginLeft: '-3.5px',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#CED4DA',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#3772FF',
-        borderWidth: "1px",
-        boxShadow: '0 0 5px rgba(55, 114, 255, 0.5)',
-      },
-    },
-  },
-}));
-
 const SignupForm = () => {
 
-  const classes = useStyles();
-
   const [signup, setSignup] = React.useState(initialState);
+  const [isSignup, setIsSignup] = React.useState(false);
   // const [modalType, setModalType] = React.useState();
   // const [isHuman, setIsHuman] = React.useState('');
 
-  React.useEffect(() => {
-  //     // load recaptcha
-    // loadReCaptcha();
-    
-    const signupDetails = JSON.parse(localStorage.getItem("credentials"))
-
-    // console.log(signupDetails);
-    if (signupDetails) {
-      setSignup(signupDetails);
-    }
-    let currentState = localStorage.getItem("currentState");
-    // if (currentState === "verify-email") {
-    //     // call api for verifying email
-        
-    //     // ................................................
-        
-    //     /*  IMPORTANT FOR EMAIL VERIFICATION */
-        
-    //     if (true) {
-    //         // simulation for email verification successful
-    //         setModalType(1);
-            
-    //         // set currentState = "verify-otp"
-    //         localStorage.setItem("currentState","verify-otp"); 
-            
-    //     } else {
-    //         //simulation for email verification unsuccessful
-    //         setModalType(2);
-    //     }
-
-        
-
-    //     // ................................................
-    // } 
-    // else if(currentState === "verify-otp") {
-    //     setModalType(3);
-
-    // }
-  }, []);
-
-  // const GiveNotifications = () => {
-  //     return <Notifications modalType={modalType} setModalType={setModalType} />
-  // }
+  const history = useHistory();
 
   // // checking the response from recaptcha
   // const CheckIsHuman = (resp) => {
   //     setIsHuman(resp);
   // }
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const [showcPassword, setShowcPassword] = React.useState(false);
+
+  const handleClickShowcPassword = () => {
+    setShowcPassword(!showcPassword);
+  };
+
+  const handleMouseDowncPassword = (event) => {
+    event.preventDefault();
+  };
 
   // advanced password format checking
   const IsPasswordValid = password => {
@@ -199,10 +161,9 @@ const SignupForm = () => {
           localStorage.setItem('token', resp.data.idToken);
           localStorage.setItem('userId', resp.data.localId);
           localStorage.setItem('userEmail',resp.data.email);
-          // localStorage.setItem('expiresIn', resp.data.expiresIn);
           localStorage.setItem('refreshToken', resp.data.refreshToken);
-          localStorage.setItem("credentials",JSON.stringify({...signup,serverError: ''}));
           // if form validation is successful, make an API call
+          setIsSignup(true);
           const formData = {
             user: {
               id: resp.data.localId,
@@ -225,6 +186,7 @@ const SignupForm = () => {
               console.log(err);
               console.log(err.response);
             })
+          // history.push('/');
         } 
       })
       .catch(err => {
@@ -236,26 +198,50 @@ const SignupForm = () => {
           recaptchaError: null,
         }
         if(err.response?.status === 400) {
-            const errorData = err.response.data
-            if(errorData.error.message === "EMAIL_EXISTS") {
-              errors.emailError = "The email address provided has an account linked to it. Please login to your existing account."
-            }
-            setSignup({...signup,...{
-              phoneError: null,
-              passwordError: null,
-              cPasswordError: null,
-              tAndCError: null,
-              error: null,
-              emailError: null,
-            },...errors})
+          const errorData = err.response.data
+          if(errorData.error.message === "EMAIL_EXISTS") {
+            errors.emailError = "The email address provided has an account linked to it. Please login to your existing account."
+          }
+          setSignup({...signup,...{
+            phoneError: null,
+            passwordError: null,
+            cPasswordError: null,
+            tAndCError: null,
+            error: null,
+            emailError: null,
+          },...errors})
+          // history.push('/signup');
         }
       })
     };
   }
 
+  // const {getToken} = React.useContext(STATE_HANDLER)
+
+  // React.useEffect(() => {
+  //   //     // load recaptcha
+  //   // loadReCaptcha();
+
+  //   // const email = localStorage.getItem('email')
+    
+
+  // if(getToken() || localStorage.getItem('token')) {
+  //     if (localStorage.getItem('token')) {
+  //       return <Redirect to={`/`} />
+  //     }
+  // }
+  // }, [getToken]);
+
+  const signSuccess = () => {
+    if (isSignup) {
+      return <Redirect to="/" />
+    }
+  }
+
   return (
     <React.Fragment>
       {/* {GiveNotifications()} */}
+      {signSuccess()}
       {/* <p className="login-cred-small mt-5">Already have an account ? <Link to="/public/login">Login</Link></p> */}
       <div className="py-3">
         <ThemeProvider theme={THEME}>
@@ -267,9 +253,7 @@ const SignupForm = () => {
                   <div className="form-row">
                       <div className="col-6">
                           <TextField 
-                            className={classes.root}
                             required
-                            variant="outlined"
                             label="First Name"
                             error={signup.firstNameError || signup.serverError ? true : false}
                             value={signup.firstName}
@@ -278,8 +262,6 @@ const SignupForm = () => {
                       </div>
                       <div className="col-6">
                           <TextField 
-                            className={classes.root}
-                            variant="outlined"
                             label="Last Name"
                             error={signup.lastNameError || signup.serverError? true : false}
                             required
@@ -289,16 +271,13 @@ const SignupForm = () => {
                       </div>
                   </div>
               </div>
-              {/* second row start*/}
               <div className="form-group">
                   <TextField 
-                    className={classes.root}
                     label="Email Address"
                     required
                     type="email"
                     color="primary"
                     error={signup.emailError || signup.serverError? true : false}
-                    variant="outlined"
                     value={signup.email}
                     onChange={e => setSignup({...signup,email: e.target.value})}
                   />
@@ -310,63 +289,44 @@ const SignupForm = () => {
                   }
                 </small>
             </div>
-            {/* third row */}
             <div className="form-group">
-              <div className="form-row">
-                {/* <div className="col-4">
-                  <FormControl
-                    variant="outlined"
-                    className="form-control"
-                  >
-                    <Select
-                    defaultValue={'+91'}
-                    >
-                      <MenuItem selected value={'+91'}>
-                        <div className="text-center">
-                          <img src="..." className="img-fluid mx-2" alt="india"/>
-                          <span
-                          style={{
-                              color: '#6C6C6C',
-                              fontWeight:'normal',
-                          }}
-                          >+91</span>
-                        </div>
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                </div> */}
-                {/* TODO: Take input in required format as in design */}
-                <div className="col-12">
-                  <TextField
-                    className={classes.root}
-                    label="Mobile Number"
-                    variant="outlined"
-                    required
-                    helperText={signup.phoneError}
-                    error={signup.phoneError || signup.serverError? true : false}
-                    style={{
-                        marginBottom: signup.phoneError ? '20px': ''
-                    }}
-                    value={signup.phone}
-                    onChange={e => setSignup({...signup,phone: e.target.value})}
-                  >
-                  </TextField>
-                </div>
-              </div>
+              <TextField
+                label="Mobile Number"
+                required
+                helperText={signup.phoneError}
+                error={signup.phoneError || signup.serverError? true : false}
+                style={{
+                    marginBottom: signup.phoneError ? '20px': ''
+                }}
+                value={signup.phone}
+                onChange={e => setSignup({...signup,phone: e.target.value})}
+              >
+              </TextField>
             </div>
             
-            {/* fourth row  */}
             <div className="form-group">
-              <TextField 
-                className={classes.root}
-                type="password"
-                required
-                error={signup.passwordError || signup.serverError? true : false}
-                label="Password"
-                variant="outlined"
-                value={signup.password}
-                onChange={e => setSignup({...signup,password: e.target.value})}
-              />
+              <FormControl label="Password" >
+                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                <Input
+                  id="standard-adornment-password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={signup.password}
+                  required
+                  error={signup.passwordError || signup.serverError? true : false}
+                  onChange={e => setSignup({...signup,password: e.target.value})}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
             </div>
 
             {/* disabled password  */}
@@ -383,20 +343,28 @@ const SignupForm = () => {
             
             {/* confirm password starts */}
             <div className="form-group">
-              <TextField 
-                className={classes.root}
-                type="password"
-                required
-                variant="outlined"
-                label="Confirm Password"
-                error={signup.cPasswordError || signup.serverError ? true : false}
-                
-                style={{
-                    marginBottom: signup.cPasswordError ? '20px': ''
-                }}
-                value={signup.confirmPassword}
-                onChange={e => setSignup({...signup,confirmPassword: e.target.value})}
-              />
+              <FormControl label="Confirm Password" >
+                <InputLabel htmlFor="standard-adornment-password1">Confirm Password</InputLabel>
+                <Input
+                  id="standard-adornment-password1"
+                  type={showcPassword ? 'text' : 'password'}
+                  value={signup.confirmPassword}
+                  required
+                  error={signup.cPasswordError || signup.serverError ? true : false}
+                  onChange={e => setSignup({...signup,confirmPassword: e.target.value})}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowcPassword}
+                        onMouseDown={handleMouseDowncPassword}
+                      >
+                        {showcPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
               {/* raise error if password not matched */}
               <div className="" style={{display: signup.cPasswordError? 'block' :'none'}}>
                 <small className="error-text">{signup.cPasswordError}</small>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
 
-import { TOKEN_HANDLER } from '../../../../shared/TOKEN_HANDLER';
+import { STATE_HANDLER } from '../../../../shared/STATE_HANDLER';
 
 import './SubHeader.scss';
 
@@ -15,7 +15,7 @@ export default class Header extends React.Component {
     };
   }
 
-  static contextType = TOKEN_HANDLER;
+  static contextType = STATE_HANDLER;
 
 render() {
   return (
