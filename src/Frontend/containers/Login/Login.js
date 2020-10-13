@@ -3,21 +3,20 @@ import React, { useContext } from 'react';
 // import Footer from '../../components/Footer/Footer';
 import {Link,  Redirect} from 'react-router-dom';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import { TOKEN_HANDLER } from '../../../shared/TOKEN_HANDLER';
+import { STATE_HANDLER } from '../../../shared/STATE_HANDLER';
 
 const Login = () => {
 
-
-  const {getToken} = useContext(TOKEN_HANDLER)
+  const {getToken} = useContext(STATE_HANDLER)
 
     // const email = localStorage.getItem('email')
     
 
-    if(getToken() || localStorage.getItem('token')) {
-        if (localStorage.getItem('token')) {
-            return <Redirect to={`/`} />
-        }
-    }
+  if(getToken() || localStorage.getItem('token')) {
+      if (localStorage.getItem('token')) {
+        return <Redirect to={`/`} />
+      }
+  }
     
   return (
     <React.Fragment>

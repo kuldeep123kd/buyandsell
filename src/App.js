@@ -1,23 +1,28 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Routes from './Frontend/Routes';
-
 // token management
-import {TOKEN_HANDLER} from './shared/TOKEN_HANDLER';
+import {STATE_HANDLER} from './shared/STATE_HANDLER';
 // import {BASEURL} from './shared/BASEURL'; 
 import axios from 'axios'
 import Axios from "axios";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 function App() {
 
   const [token, setToken] = React.useState();
   const [showcategories, setShowcategories] = React.useState(false);
   const [imgUrl, setImgUrl] = React.useState('');
+  const [pageTitle, setPageTitle] = React.useState('');
+  const [path, setPath] = React.useState('');
   const [product, setFormProduct] = React.useState([]);
   const [userInfo, setUserInfo] = React.useState({
     uId: '',
     emailVerified: null
   });
+
+  const history = useHistory();
 
   const showCat = () => {
     setShowcategories(true);
@@ -49,10 +54,13 @@ function App() {
         }
       })
       .catch(err => {
-        console.log("Hello"+err.response)
-        if(err.response?.status === 401) {
+        console.log(err.response)
+        if(err.response.status === 400 || err.response.status === 403 ) {
+          //"The request is missing a valid API key."
+          //"API key not valid. Please pass a valid API key."
           // clear the interval and also localStorage
-          DeleteToken()
+          DeleteToken();
+          history.push('/login');
         }
       })
     }
@@ -85,7 +93,7 @@ function App() {
       localStorage.clear()
     }
     setToken('')
-
+    // history.push('/login');
   }
 
   React.useEffect(() => {
@@ -141,19 +149,31 @@ function App() {
           .catch((err) => {
             console.log(err);
             console.log(err.response);
+            if (err.response.status === 400 || err.response.data.error.message === "INVALID_ID_TOKEN") {
+              localStorage.clear();
+              history.push('/login');
+            }
           });
       }
     // })();
   }, []);
 
   return (
-    <>
-    <TOKEN_HANDLER.Provider
-        value={{ getToken, ModifyToken, DeleteToken, showCat, showcategories, imgUrl, setImgUrl, product, setFormProduct, userInfo }}
-    >
-      <Routes />
-    </TOKEN_HANDLER.Provider>
-    </>
+    <React.Fragment>
+      <STATE_HANDLER.Provider
+          value={{ getToken, ModifyToken, DeleteToken, showCat, showcategories, imgUrl, setImgUrl, product, setFormProduct, userInfo, setPath, setPageTitle }}
+      >
+        <HelmetProvider >
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>{pageTitle}</title>
+            <link rel="canonical" href={path} />
+            <base href={window.location.pathname} target="_blank" />
+          </Helmet>
+          <Routes />
+        </HelmetProvider>
+      </STATE_HANDLER.Provider>
+    </React.Fragment>
   );
 }
 

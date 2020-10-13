@@ -1,8 +1,6 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-// import { Link, Redirect } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import Axios from "axios";
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import Visibility from "@material-ui/icons/Visibility";
@@ -12,36 +10,10 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
-  OutlinedInput,
+  Input,
 } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& label.MuiInputLabel-outlined": {
-      display: "flex",
-    },
-    "& label.Mui-focused": {
-      color: "#3772FF",
-      backgroundColor: "#fff",
-      padding: "0 5px",
-      marginLeft: "-3.5px",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "#CED4DA",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#3772FF",
-        borderWidth: "1px",
-        boxShadow: "0 0 5px rgba(55, 114, 255, 0.5)",
-      },
-    },
-  },
-}));
-
 const PasswordChange = (props) => {
-
-  const classes = useStyles();
 
   const [password, setPassword] = React.useState({
     current: "",
@@ -203,11 +175,8 @@ const PasswordChange = (props) => {
         <h1>Change Password</h1>
         <div className="change-pass position-relative">
           <TextField
-            className={classes.root}
             type="password"
-            id="outlined-basic"
             label="Current password"
-            variant="outlined"
             value={password.current}
             required
             onChange={(e) =>
@@ -226,35 +195,26 @@ const PasswordChange = (props) => {
         </div>
 
         <div className="change-pass position-relative">
-          <FormControl className={classes.root} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">
-              New Password
-                </InputLabel>
-            <OutlinedInput
-              label="New Password"
-              id="outlined-adornment-password"
-              type={showPassword ? "text" : "password"}
+          <FormControl label="Password" >
+            <InputLabel htmlFor="standard-adornment-password1">Password</InputLabel>
+            <Input
+              id="standard-adornment-password1"
+              type={showPassword ? 'text' : 'password'}
+              value={password.password}
               required
               onChange={(e) =>
-                setPassword({ ...password, password: e.target.value })
-              }
+                setPassword({ ...password, password: e.target.value })}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
-                    edge="end"
                   >
-                    {showPassword ? (
-                      <Visibility />
-                    ) : (
-                        <VisibilityOff />
-                      )}
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={70}
             />
           </FormControl>
           <div
@@ -264,39 +224,29 @@ const PasswordChange = (props) => {
           </div>
         </div>
         <div className="change-pass position-relative">
-          <FormControl className={classes.root} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password1">
-              Confirm Password
-                </InputLabel>
-            <OutlinedInput
-              label="Confirm Password"
-              id="outlined-adornment-password1"
-              type={showPassword ? "text" : "password"}
+          <FormControl >
+            <InputLabel htmlFor="standard-adornment-password">Confirm Password</InputLabel>
+            <Input
+              id="standard-adornment-password"
+              type={showPassword ? 'text' : 'password'}
               value={password.confirmPassword}
               required
               onChange={(e) =>
                 setPassword({
                   ...password,
                   confirmPassword: e.target.value,
-                })
-              }
+                })}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
-                    edge="end"
                   >
-                    {showPassword ? (
-                      <Visibility />
-                    ) : (
-                        <VisibilityOff />
-                      )}
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={70}
             />
           </FormControl>
           <small

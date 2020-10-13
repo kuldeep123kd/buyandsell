@@ -6,7 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import './HomePage.scss';
 import ControlledCarousel from './ControlledCarousel';
-import {TOKEN_HANDLER} from '../../../shared/TOKEN_HANDLER';
+import {STATE_HANDLER} from '../../../shared/STATE_HANDLER';
 import kitchenimg1 from '../../../assets/images/sec2-kitchen-img2.png';
 import bottlesimg1 from '../../../assets/images/sec2-bottles-img1.png';
 import laptoppcimg1 from '../../../assets/images/sec2-laptop-pc-img1.png';
@@ -23,9 +23,11 @@ class HomePage extends React.Component {
     };
   }
 
-  static contextType = TOKEN_HANDLER;
+  static contextType = STATE_HANDLER;
 
   async componentDidMount() {
+    this.context.setPageTitle('Shopping Site - Buy and Sell Products');
+    this.context.setPath('/');
     let tk = localStorage.getItem("token");
     if(tk) {
       this.setState({

@@ -1,14 +1,14 @@
 import Axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { projectStorage } from './firebase/config';
-import { TOKEN_HANDLER } from './TOKEN_HANDLER';
+import { STATE_HANDLER } from './STATE_HANDLER';
 
 const useStorage = (file) => {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
   const [url, setUrl] = useState(null);
 
-  const {setImgUrl, product} = React.useContext(TOKEN_HANDLER);
+  const {setImgUrl, product} = React.useContext(STATE_HANDLER);
 
 
   useEffect(() => {

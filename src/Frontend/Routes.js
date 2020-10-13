@@ -16,6 +16,7 @@ import Verification from './containers/UserProfile/Verification/Verification';
 import Progress from "./components/ProgressLoader/Progress";
 import UserProfile from "./containers/UserProfile/UserProfile";
 import LoginSettings from "./containers/UserProfile/LoginSettings/LoginSettings";
+import CategoryDetail from './containers/pagedetails/CategoryDetail/CategoryDetail';
 
 const asyncLogin = asyncComponent(() => {
   return import('./containers/Login/Login');
@@ -48,6 +49,7 @@ const Routes = () => {
         <Route exact path="/verification" component={Verification} />
         <Route path="/youraccount/loginsettings" component={LoginSettings} />
         <Route path="/youraccount" component={UserProfile} />
+        <Route path="/categorydetail" component={CategoryDetail} />
         <Route path="*" component={NoMatch} />
       </Switch>
     </ScrollToTop>

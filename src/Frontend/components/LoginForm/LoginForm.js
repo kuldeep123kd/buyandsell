@@ -6,8 +6,16 @@ import '../SignupForm/SignForm.scss';
 import { Link, Redirect } from 'react-router-dom';
 import Axios from 'axios'
 import {THEME} from '../../../shared/THEME';
-import {TOKEN_HANDLER} from '../../../shared/TOKEN_HANDLER';
-import { makeStyles } from '@material-ui/core/styles';
+import {STATE_HANDLER} from '../../../shared/STATE_HANDLER';
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+} from "@material-ui/core";
+import Input from '@material-ui/core/Input';
 
 const initialState = {
   email: '',
@@ -19,36 +27,20 @@ const initialState = {
   returnSecureToken: true
 }
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& label.MuiInputLabel-outlined': {
-      display: 'flex'
-    },
-    '& label.Mui-focused': {
-      color: '#3772FF',
-      backgroundColor: '#fff',
-      padding: '0 5px',
-      marginLeft: '-3.5px',
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: '#CED4DA',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#3772FF',
-        borderWidth: "1px",
-        boxShadow: '0 0 5px rgba(55, 114, 255, 0.5)',
-      },
-    },
-  },
-}));
-
 const LoginForm = (props) => {
   const [login,setLogin] = useState(initialState);
 
-  const classes = useStyles();
+  const {ModifyToken,getToken} = React.useContext(STATE_HANDLER)
 
-  const {ModifyToken,getToken} = React.useContext(TOKEN_HANDLER)
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   React.useEffect(()=>{
     const token = getToken()
@@ -111,24 +103,33 @@ const LoginForm = (props) => {
                 required
                 value={login.email}
                 onChange={e => setLogin({...login,email: e.target.value})}
-                className={classes.root}
-                variant="outlined"
                 color = "primary"
                 type="email"
               />
             </div>
             <div className="form-group">
-              <TextField 
-                label="Password"
-                type="password"
-                required
-                value={login.password}
-                onChange={e => setLogin({...login,password: e.target.value})}
-                error={login.error}
-                className={classes.root}
-                variant="outlined"
-                color="primary"
-              />
+              <FormControl label="Password" >
+                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                <Input
+                  id="standard-adornment-password"
+                  type={showPassword ? 'text' : 'password'}
+                  value={login.password}
+                  required
+                  error={login.error}
+                  onChange={e => setLogin({...login,password: e.target.value})}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
             </div>
             <div className="form-group">
               <div className="row no-gutters">
