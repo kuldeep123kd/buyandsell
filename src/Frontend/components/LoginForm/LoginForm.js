@@ -61,7 +61,6 @@ const LoginForm = (props) => {
         localStorage.setItem('refreshToken',resp.data.refreshToken);
         localStorage.setItem('userEmail',resp.data.email);
         localStorage.setItem('userId', resp.data.localId);
-        // localStorage.setItem('expiresIn', resp.data.expiresIn);
         setLogin({...initialState, redirect:true});
       }
     })
@@ -92,7 +91,6 @@ const LoginForm = (props) => {
     return (
       <React.Fragment>
         {red()}
-        {/* <p className="login-cred-small mt-5">Don't have an account ? <Link to="/public/signup">Signup</Link></p> */}
         {RaiseError()}
         <form onSubmit={formSubmit}>
           <ThemeProvider theme={THEME}>

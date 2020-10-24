@@ -4,10 +4,13 @@ import Header from "../../components/Header/Header";
 import SubHeader from "../../components/Header/SubHeader/SubHeader";
 import Footer from "../../components/Footer/Footer";
 import { Link } from "react-router-dom";
+import { STATE_HANDLER } from "../../../shared/STATE_HANDLER";
 import ProgressLoader from "../../components/ProgressLoader/ProgressLoader";
 
 const UserProfile = () => {
   const tk = localStorage.getItem("token");
+
+  const {setPageTitle, setPath} = React.useContext(STATE_HANDLER);
 
   const sendLink = () => {
     Axios.post(
@@ -25,6 +28,11 @@ const UserProfile = () => {
         console.log(err.response);
       });
   };
+
+  React.useEffect(() => {
+    setPageTitle('User Profile | Shopping Site - Buy and Sell Products');
+    setPath('/youraccount');
+  },[setPageTitle, setPath]);
 
   return (
     <>

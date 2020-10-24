@@ -25,31 +25,9 @@ class HomePage extends React.Component {
 
   static contextType = STATE_HANDLER;
 
-  async componentDidMount() {
+  componentDidMount() {
     this.context.setPageTitle('Shopping Site - Buy and Sell Products');
     this.context.setPath('/');
-    let tk = localStorage.getItem("token");
-    if(tk) {
-      this.setState({
-        isLoading: true
-      });
-      await Axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
-        {
-          idToken: tk
-        }
-      )
-      .then(resp => {
-        console.log(resp);
-        this.setState({
-          isLoading: false
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        console.log(err.response);
-      })
-    }
-
   }
 
   render () {

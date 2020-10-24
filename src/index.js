@@ -2,7 +2,7 @@ import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/ie11';
 import "react-app-polyfill/stable";
 import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './App.scss';
 
 import React from 'react';
