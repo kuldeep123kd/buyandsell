@@ -32,7 +32,7 @@ const initialState = {
 };
 
 const LoginSettings = () => {
-  const { userInfo } = React.useContext(STATE_HANDLER);
+  const { userInfo, setPageTitle, setPath } = React.useContext(STATE_HANDLER);
   const [login, setLogin] = React.useState(initialState);
   const [showModel, setShowModel] = React.useState(false);
   const [showChangeEmail, setShowChangeEmail] = React.useState(false);
@@ -199,6 +199,10 @@ const LoginSettings = () => {
     }
   };
 
+  React.useEffect(() => {
+    setPageTitle('BuySell User Login Settings | Shopping Site - Buy and Sell Products');
+    setPath('/youraccount');
+  },[setPageTitle, setPath]);
 
   return (
     <>

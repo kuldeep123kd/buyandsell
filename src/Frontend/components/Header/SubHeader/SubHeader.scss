@@ -42,7 +42,8 @@
 .sub-nav {
   box-shadow: 0 2px 2.5px 0 rgba(0, 0, 0, 0.1);
   background: #FFFFFF;
-  height: 40px;
+  height: 65px;
+  z-index: 1;
 }
 
 .sub-nav-child {
@@ -143,6 +144,22 @@
   li {
     @include liStyle();
     margin-right: 0;
+  }
+}
+
+.email-verify-notify {
+  z-index: 1;
+  height: 25px;
+  h1 {
+    font-size: 1rem;
+    margin: 0;
+    span {
+      color: #3772ff;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 

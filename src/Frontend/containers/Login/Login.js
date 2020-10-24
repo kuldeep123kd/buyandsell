@@ -7,10 +7,12 @@ import { STATE_HANDLER } from '../../../shared/STATE_HANDLER';
 
 const Login = () => {
 
-  const {getToken} = useContext(STATE_HANDLER)
-
-    // const email = localStorage.getItem('email')
+  const {getToken, setPageTitle, setPath} = useContext(STATE_HANDLER)
     
+  React.useEffect(() => {
+    setPageTitle('Shopping Site - Buy and Sell Products | Login');
+    setPath('/login');
+  },[setPageTitle, setPath]);
 
   if(getToken() || localStorage.getItem('token')) {
       if (localStorage.getItem('token')) {

@@ -93,7 +93,6 @@ function App() {
       localStorage.clear()
     }
     setToken('')
-    // history.push('/login');
   }
 
   React.useEffect(() => {
@@ -150,13 +149,13 @@ function App() {
             console.log(err);
             console.log(err.response);
             if (err.response.status === 400 || err.response.data.error.message === "INVALID_ID_TOKEN") {
-              localStorage.clear();
+              // DeleteToken();
               history.push('/login');
             }
           });
       }
     // })();
-  }, []);
+  }, [history]);
 
   return (
     <React.Fragment>

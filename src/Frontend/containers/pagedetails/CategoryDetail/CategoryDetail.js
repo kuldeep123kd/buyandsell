@@ -5,7 +5,11 @@ import Header from "../../../components/Header/Header";
 import SubHeader from "../../../components/Header/SubHeader/SubHeader";
 import ProgressLoader from "../../../components/ProgressLoader/ProgressLoader";
 import './CategoryDetail.scss';
+import ClickedResults from "./ClickedResults";
 import FilterAccordion from "./FilterAccordion";
+import SearchResults from "./SearchResults";
+
+
 const CategoryDetail = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
@@ -18,7 +22,7 @@ const CategoryDetail = () => {
           <SubHeader />
           <div className="category-detail">
             <div className="row">
-              <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+              <div className="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div className="category-filter">
                   <h1>Filters</h1>
                   <hr />
@@ -30,10 +34,9 @@ const CategoryDetail = () => {
                   <FilterAccordion text1={'BRANDS'} text2={'BRANDS'} />
                 </div>
               </div>
-              <div className="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                <div className="category-products">
-                  <small><Link to="/">Home</Link>{">"}</small>
-                </div>
+              <div className="col-xl-10 col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <SearchResults />
+                {/* <ClickedResults /> */}
               </div>
             </div>
           </div>
