@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ReactImageZoom from 'react-image-zoom';
 
 import Header from '../../../components/Header/Header';
 import SubHeader from '../../../components/Header/SubHeader/SubHeader';
 import Footer from '../../../components/Footer/Footer';
+import kitchenimg1 from '../../../../assets/images/sec2-kitchen-img2.png';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
+
+  const options = {width: 400, zoomWidth: 500, scale: 1.5, img: `${kitchenimg1}`};
 
   return (
     <>
@@ -15,13 +19,14 @@ const ProductDetail = () => {
       <div className="product-detail">
         <div className="row">
           <div className="col-lg-5">
-            <ul>
+            {/* <ul>
               <li>Relevance</li>
               <li>Popularity</li>
               <li>Price -- Low to High</li>
               <li>Price -- High to Low</li>
               <li>Newest First</li>
-            </ul>
+            </ul> */}
+            <ReactImageZoom {...options} />
           </div>
           <div className="col-lg-7">
             <div>
