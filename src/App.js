@@ -6,7 +6,6 @@ import Routes from './Frontend/Routes';
 import {STATE_HANDLER} from './shared/STATE_HANDLER';
 // import {BASEURL} from './shared/BASEURL'; 
 import axios from 'axios'
-import Axios from "axios";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 function App() {
@@ -129,7 +128,7 @@ function App() {
     // (async () => {
       let tk = localStorage.getItem("token");
       if (tk) {
-        Axios.post(
+        axios.post(
           `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_API_KEY}`,
           {
             idToken: tk,
